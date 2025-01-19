@@ -78,7 +78,7 @@ class MostProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = self.object
-        comments = Comment.objects.filter(most_sell_product=product).order_by('-created_at')  # Query comments related to MostSellProduct
+        comments = Comment.objects.filter(most_sell_product=product).order_by('-created_at')  
         context.update({
             'colors': product.color.all(),
             'mostsellproduct': product,
