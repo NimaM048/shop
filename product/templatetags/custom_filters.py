@@ -22,6 +22,6 @@ def to_jalali(date):
         return ""
     date = localtime(date)  
     jalali_date = jdatetime.datetime.fromgregorian(datetime=date)
-    return jalali_date.strftime('%Y/%m/%d')  # Format: YYYY/MM/DD
+    return jalali_date.strftime('%Y/%m/%d') 
 
 
