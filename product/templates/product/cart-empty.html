@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سبد خرید</title>
+
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body class="max-w-[1600px] mx-auto bg-[#fcfcfc]">
+  <header class="fixed w-full max-w-[1600px] border-b z-50 bg-white">
+    <!-- search bar -->
+   {% include 'includes/search.html' %}
+    <!-- header -->
+   {% include 'includes/header.html' %}
+  </header>
+  <main class="pt-20 md:pt-40 lg:pt-[73px]">
+    <div class="bg-white shadow-large lg:my-10 mx-5 rounded-xl md:rounded-2xl p-3 md:p-5 border">
+      <div class="bg-white shadow-box-sm rounded-xl py-5 px-2 sm:px-6">
+        <img class="mx-auto rounded-3xl" src="{% static 'image/empty-cart.svg' %}" alt="">
+        <div class="text-zinc-700 text-center mt-7 mb-5 text-lg">
+          سبد خرید شما خالی است!
+        </div>
+        <div class="flex justify-center items-center mb-5">
+          <a class="text-zinc-600 hover:text-zinc-500 transition" href="{% url 'product:all_products' %}">
+            دیدن محصولات
+          </a>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#575757" viewBox="0 0 256 256"><path d="M164.24,203.76a6,6,0,1,1-8.48,8.48l-80-80a6,6,0,0,1,0-8.48l80-80a6,6,0,0,1,8.48,8.48L88.49,128Z"></path></svg>
+        </div>
+      </div>
+    </div>
+  </main>
+  {% include 'includes/footer.html' %}
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>

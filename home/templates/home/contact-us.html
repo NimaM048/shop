@@ -1,0 +1,202 @@
+{% load  static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ارتباط با ما</title>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body class="max-w-[1600px] mx-auto bg-[#fcfcfc]">
+<header class="fixed w-full max-w-[1600px] border-b z-50 bg-white">
+    <!-- search bar -->
+    <div class="items-center z-50 flex-wrap gap-y-5 bg-white rounded-lg overflow-hidden p-2 justify-between drop-shadow-md absolute top-0 left-3 w-11/12 max-w-4xl hidden"
+         id="searchBar">
+        <svg class="fill-blue-500" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill=""
+             viewBox="0 0 256 256">
+            <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+        </svg>
+        <input class="text-base text-gray-700 flex-grow outline-none px-2" type="text"
+               placeholder="نام محصول را وارد کنید"/>
+        <div class="md:flex items-center rounded-lg pl-2 gap-x-2 mx-auto">
+            <select id="category" class="text-sm text-gray-800 outline-none border-2 p-2 rounded-lg cursor-pointer">
+                <option value="all" selected>انتخاب دسته بندی</option>
+                <option value="mobile">موبایل</option>
+                <option value="home">لوازم خانگی</option>
+                <option value="laptop">لپ تاپ</option>
+            </select>
+            <button class="bg-blue-500 hover:bg-blue-400 transition text-white rounded-lg px-4 py-2 md:px-6 md:py-2 text-sm">
+                جستجو
+            </button>
+        </div>
+    </div>
+    <!-- header -->
+    {% include 'includes/header.html' %}
+    </div>
+    </div>
+    </div>
+</header>
+<main class="pt-20 md:pt-40 lg:pt-[73px]">
+    <div class="bg-white shadow-large lg:my-10 mx-5 rounded-xl md:rounded-2xl p-3 md:p-5 border">
+        <div class="flex justify-center items-center lg:my-0">
+            <div class="content-center px-4 my-8">
+                <div class="text-center mb-2 text-zinc-700 text-lg font-semibold">
+                    با خیال راحت با تیم پشتیبانی سورنا ارتباط برقرار کنید
+                </div>
+                <div class="text-center text-zinc-600 text-sm">
+                    اطلاعات فرم را پر کنید تا کارشناسان ما با شما تماس بگیرند
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto md:px-6 mb-8">
+            <!-- Section: Design Block -->
+            <section>
+                <div class="relative h-[300px] overflow-hidden bg-cover bg-[50%] bg-no-repeat rounded-md"
+                     style="background-image: url({% static 'image/bgConatactUs.jpg' %});"></div>
+                <div class="container px-6 md:px-12">
+                    <div
+                            class="block rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-12 shadow-lg md:py-16 md:px-12 -mt-24 backdrop-blur-xl">
+                        <div class="flex flex-wrap">
+                            <div class="mb-12 w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6">
+                                <form id="contact-form" method="post">
+                                    {% csrf_token %}
+                                    <div class="relative mb-6">
+                                        {{ form.name }}
+                                        <label for="{{ form.name.id_for_label }}"></label>
+                                        {% if form.name.errors %}
+                                            <div class="text-red-500">{{ form.name.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="relative mb-6">
+                                        {{ form.email }}
+                                        <label for="{{ form.email.id_for_label }}"></label>
+                                        {% if form.email.errors %}
+                                            <div class="text-red-500">{{ form.email.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="relative mb-6">
+                                        {{ form.message }}
+                                        <label for="{{ form.message.id_for_label }}"></label>
+                                        {% if form.message.errors %}
+                                            <div class="text-red-500">{{ form.message.errors }}</div>
+                                        {% endif %}
+                                    </div>
+
+                                    <button type="submit"
+                                            class="w-full inline-block py-3 px-10 text-sm bg-blue-500 hover:bg-blue-400 transition text-gray-100 rounded-xl text-center">
+                                        ارسال
+                                    </button>
+                                </form>
+                                <div id="success-message" class="hidden text-green-500 mt-4">پیام شما با موفقیت ثبت
+                                    شد!
+                                </div>
+
+                            </div>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const form = document.getElementById('contact-form');
+                                    const successMessage = document.getElementById('success-message');
+
+                                    form.addEventListener('submit', function (event) {
+                                        event.preventDefault(); // Prevent default form submission
+
+                                        const formData = new FormData(form);
+
+                                        fetch(form.action, {
+                                            method: 'POST',
+                                            body: formData,
+                                            headers: {
+                                                'X-Requested-With': 'XMLHttpRequest',
+                                            },
+                                        })
+                                            .then(response => {
+                                                if (response.ok) {
+                                                    successMessage.classList.remove('hidden');
+                                                    successMessage.classList.add('block');
+                                                    form.reset(); // Clear the form fields
+                                                } else {
+                                                    console.error('Form submission failed');
+                                                }
+                                            })
+                                            .catch(error => console.error('Error:', error));
+                                    });
+                                });
+                            </script>
+                            <style>
+                                #success-message {
+                                    transition: opacity 0.5s ease-in-out;
+                                    opacity: 0;
+                                }
+
+                                #success-message.block {
+                                    opacity: 1;
+                                }
+
+                            </style>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-10 h-fit w-full lg:w-7/12">
+                                <div class="flex items-center gap-x-1 bg-white text-blue-600 px-3 py-3 rounded-lg shadow-md">
+                                    <svg class="fill-white bg-blue-500 p-1 rounded-md h-8 w-8 md:h-10 md:w-10 ml-2"
+                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                                        <path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80,40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44 ,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"></path>
+                                    </svg>
+                                    <span class="inline-block text-sm">
+            شماره تماس شرکت:
+        </span>
+                                    <span class="inline-block text-xs">
+            {{ contact_info.phone_number }}
+        </span>
+                                </div>
+                                <div class="flex items-center gap-x-1 bg-blue-500 text-white px-3 py-3 rounded-lg shadow-md">
+                                    <svg class="fill-blue-500 bg-white p-1 rounded-md h-8 w-8 md:h-10 md:w-10 ml-2"
+                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                                        <path d="M128,24a104,104,0,0,0,0,208c21.51,0,44.1-6.48,60.43-17.33a8,8,0,0,0-8.86-13.33C166,210.38,146.21,216,128,216a88,88,0,1,1,88-88c0,26.45-10.88,32-20,32s-20-5.55-20-32V88a8,8,0,0,0-16,0v4.26a48,48,0,1,0,5.93,65.1c6,12,16.35,18.64,30.07,18.64,22.54,0,36-17.94,36-48A104.11,104.11,0,0,0,128,24Zm0,136a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
+                                    </svg>
+                                    <span class="inline-block text-sm">
+            ایمیل:
+        </span>
+                                    <span class="inline-block text-xs">
+            {{ contact_info.email }}
+        </span>
+                                </div>
+                                <div class="flex items-center gap-x-1 bg-blue-500 text-white px-3 py-3 rounded-lg shadow-md">
+                                    <svg class="fill-blue-500 bg-white p-1 rounded-md h-8 w-8 md:h-10 md:w-10 ml-2"
+                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                                        <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"></path>
+                                    </svg>
+                                    <span class="inline-block text-sm">
+            ساعت پاسخگویی:
+        </span>
+                                    <span class="inline-block text-xs">
+            {{ contact_info.working_hours }}
+        </span>
+                                </div>
+                                <div class="flex items-center gap-x-1 bg-white text-blue-600 px-3 py-3 rounded-lg shadow-md">
+                                    <svg class="fill-white bg-blue-500 p-1 rounded-md h-8 w-8 md:h-10 md:w-10 ml-2"
+                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                                        <path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0, 0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"></path>
+                                    </svg>
+                                    <span class="inline-block text-sm">
+            آدرس حضوری:
+        </span>
+                                    <span class="inline-block text-xs">
+            {{ contact_info.address }}
+        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Section: Design Block -->
+        </div>
+    </div>
+</main>
+{% include 'includes/footer.html' %}
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>

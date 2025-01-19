@@ -1,0 +1,383 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه اصلی</title>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body class="max-w-[1600px] mx-auto bg-[#fcfcfc]">
+<header class="fixed w-full max-w-[1600px] border-b z-50 bg-white">
+    <!-- search bar -->
+   {% include 'includes/search.html' %}
+    <!-- header -->
+    {% include 'includes/header.html' %}
+</header>
+<main class="pt-20 md:pt-40 lg:pt-[73px]">
+    <!-- hero slider -->
+    <div class="swiper heroSlider rounded-lg">
+        <div class="swiper-wrapper">
+            <a href="" class="swiper-slide">
+                <img src="{% static 'image/heroSlider/1.webp' %}" alt="">
+            </a>
+            <a href="" class="swiper-slide">
+                <img src="{% static 'image/heroSlider/2.webp' %}" alt="">
+            </a>
+            <a href="" class="swiper-slide">
+                <img src="{% static 'image/heroSlider/3.webp' %}" alt="">
+            </a>
+            <a href="" class="swiper-slide">
+                <img src="{% static 'image/heroSlider/4.webp' %}" alt="">
+            </a>
+            <a href="" class="swiper-slide">
+                <img src="{% static 'image/heroSlider/5.webp' %}" alt="">
+            </a>
+        </div>
+        <div class="swiper-button-next shadow-lg"></div>
+        <div class="swiper-button-prev shadow-lg"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <!-- animate btn -->
+    <div class="flex justify-center my-10">
+        <svg class="animate-bounce fill-blue-500" xmlns="http://www.w3.org/2000/svg" width="44" height="44"
+             fill="#f7f7f7" viewBox="0 0 256 256">
+            <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm37.66-85.66a8,8,0,0,1,0,11.32l-32,32a8,8,0,0,1-11.32,0l-32-32a8,8,0,0,1,11.32-11.32L120,148.69V88a8,8,0,0,1,16,0v60.69l18.34-18.35A8,8,0,0,1,165.66,130.34Z"></path>
+        </svg>
+    </div>
+    <!-- category -->
+    <div class="pb-6">
+        <div class="flex justify-center px-3 md:px-10 items-center">
+            <div class="text-gray-900 pb-2 mb-5 text-2xl font-extrabold">
+                محبوب ترین دسته ها
+            </div>
+        </div>
+        <div class="flex flex-wrap gap-4 md:gap-x-8 justify-center">
+            {% for category in category %}
+                <a class="border-2 border-gray-300 hover:border-blue-600 rounded-full hover:shadow-md group hover:bg-blue-600 hover:text-white transition duration-200 w-24 md:w-28 h-24 md:h-28 opacity-90 text-zinc-800 text-sm font-semibold flex flex-col gap-y-2 items-center justify-center"
+                   href="{% url 'product:all_products' %}?category={{ category.name }}">
+                    <svg class="fill-gray-900 group-hover:fill-white transition duration-200"
+                         xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="#000000" viewBox="0 0 256 256">
+                        <path d="M232,96a7.89,7.89,0,0,0-.3-2.2L217.35,43.6A16.07,16.07,0,0,0,202,32H54A16.07,16.07,0,0,0,38.65,43.6L24.31,93.8A7.89,7.89,0,0,0,24,96h0v16a40,40,0,0,0,16,32v72a8,8,0,0,0,8,8H208a8,8,0,0,0,8-8V144a40,40,0,0,0,16-32V96ZM54,48H202l11.42,40H42.61Zm50,56h48v8a24,24,0,0,1-48,0Zm-16,0v8a24,24,0,0,1-35.12,21.26,7.88,7.88,0,0,0-1.82-1.06A24,24,0,0,1,40,112v-8ZM200,208H56V151.2a40.57,40.57,0,0,0,8,.8,40,40,0,0,0,32-16,40,40,0,0,0,64,0,40,40,0,0,0,32,16,40.57,40.57,0,0,0,8-.8Zm4.93-75.8a8.08,8.08,0,0,0-1.8,1.05A24,24,0,0,1,168,112v-8h48v8A24,24,0,0,1,204.93,132.2Z"></path>
+                    </svg>
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- product sldier 1 -->
+    <div class="my-10 px-3">
+        <!-- TOP SLIDER -->
+        <div class="flex justify-between items-center pb-3">
+            <div class="px-4 py-2 flex justify-center items-center gap-x-1 font-bold md:text-lg text-zinc-700 relative">
+                <div class="z-10">
+                    محصولات پرتخفیف
+                </div>
+                <div class="w-20 h-2 bg-blue-300 shadow-lg absolute right-5 top-5 rounded-sm">
+                </div>
+            </div>
+            <a href="{% url 'product:all_products' %}">
+                <div class="transition px-4 py-2 flex justify-center items-center text-zinc-700 hover:text-zinc-600">
+                    مشاهده همه
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#292929" viewBox="0 0 256 256">
+                        <path d="M164.24,203.76a6,6,0,1,1-8.48,8.48l-80-80a6,6,0,0,1,0-8.48l80-80a6,6,0,0,1,8.48,8.48L88.49,128Z"></path>
+                    </svg>
+                </div>
+            </a>
+        </div>
+        <!-- SLIDER -->
+        <div class="containerPSlider swiper">
+            <div class="product-slider1">
+                <div class="card-wrapper swiper-wrapper">
+                    {% for product in products %}
+                        <div class="card swiper-slide my-2 p-2 md:p-4 bg-white rounded-2xl border group">
+                            <div class="flex justify-between relative">
+                                {% if product.discount_percentage > 0 %}
+                                    <div class="bg-blue-500 rounded-full w-8 h-8 pt-1 text-white flex items-center justify-center text-xs">
+                                        % {{ product.discount_percentage }}
+                                    </div>
+                                {% endif %}
+                                <div class="flex flex-col gap-y-2 absolute opacity-0 group-hover:opacity-100 left-0 transition-opacity duration-300 ease-out">
+                                    <!-- Favorite and Share Icons -->
+                                </div>
+                            </div>
+                            <div class="image-box mb-6">
+                                <img class="max-w-52 mx-auto" src="{{ product.image.url }}" alt="{{ product.name }}"/>
+                            </div>
+                            <div class="space-y-5">
+      <span class="mb-2 h-8 md:h-10 flex justify-between">
+        <a href="#" class="flex flex-col gap-y-2">
+          <span class="text-sm font-semibold text-zinc-800">{{ product.name }}</span>
+          <span class="text-xs text-zinc-500">{{ product.description }}</span>
+        </a>
+      </span>
+                                <div class="flex items-center gap-x-2">
+                                    {% if product.discounted_price %}
+                                        <div class="flex justify-center gap-x-1 text-xs text-zinc-400">
+                                            <div class="line-through">{{ product.price }}</div>
+                                            <div>تومان</div>
+                                        </div>
+                                        <div class="flex justify-center gap-x-1 font-semibold text-zinc-800">
+                                            <div>{{ product.discounted_price }}</div>
+                                            <div>تومان</div>
+                                        </div>
+                                    {% else %}
+                                        <div class="flex justify-center gap-x-1 font-semibold text-zinc-800">
+                                            <div>{{ product.price }}</div>
+                                            <div>تومان</div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <a href="{% url 'product:product_detail' product.id %}"
+                                   class="flex items-center justify-center gap-x-1 text-sm w-full py-2 px-2 rounded-lg text-white bg-blue-500 hover:bg-blue-400 transition">
+                                    خرید محصول
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 2 banner -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 px-3">
+        <a href="">
+            <img class="rounded-md" src="{% static 'image/banner/5.webp' %}" alt="">
+        </a>
+        <a href="">
+            <img class="rounded-md" src="{% static 'image/banner/6.webp' %}" alt="">
+        </a>
+    </div>
+    <!-- pop products -->
+
+    <!-- product sldier 2 -->
+    <div class="my-10 px-3">
+        <!-- TOP SLIDER -->
+        <div class="flex justify-between items-center pb-3">
+            <div class="px-4 py-2 flex justify-center items-center gap-x-1 font-bold md:text-lg text-zinc-700 relative">
+                <div class="z-10">
+                    محصولات پرفروش
+                </div>
+                <div class="w-20 h-2 bg-blue-300 shadow-lg absolute right-5 top-5 rounded-sm">
+                </div>
+            </div>
+            <a href="{% url 'product:all_products' %}">
+                <div class="transition px-4 py-2 flex justify-center items-center text-zinc-700 hover:text-zinc-600">
+                    مشاهده همه
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#292929" viewBox="0 0 256 256">
+                        <path d="M164.24,203.76a6,6,0,1,1-8.48,8.48l-80-80a6,6,0,0,1,0-8.48l80-80a6,6,0,0,1,8.48,8.48L88.49,128Z"></path>
+                    </svg>
+                </div>
+            </a>
+        </div>
+        <!-- SLIDER -->
+        <div class="containerPSlider swiper">
+            <div class="product-slider1">
+                <div class="card-wrapper swiper-wrapper">
+                    {% for products in product %}
+                        <div class="card swiper-slide my-2 p-2 md:p-4 bg-white rounded-2xl border group"
+                        >
+
+                            <div class="flex justify-between relative">
+                                <div class="flex flex-col gap-y-2 absolute opacity-0 group-hover:opacity-100 left-0 transition-opacity duration-300 ease-out">
+                                    <!-- Add icons for actions -->
+                                    <svg class="bg-gray-200 rounded-full p-1 hover:fill-red-500 transition cursor-pointer"
+                                         xmlns="http://www.w3.org/2000/svg" width="33" height="33"
+                                         fill="#2b2b2b" viewBox="0 0 256 256">
+                                        <path d="M178,34c-21,0-39.26,9.47-50,25.34C117.26,43.47,99,34,78,34A60.07,60.07,0,0,0,18,94c0,29.2,18.2,59.59,54.1,90.31a334.68,334.68,0,0,0,53.06,37,6,6,0,0,0,5.68,0,334.68,334.68,0,0,0,53.06-37C219.8,153.59,238,123.2,238,94A60.07,60.07,0,0,0,178,34ZM128,209.11C111.59,199.64,30,149.72,30,94A48.05,48.05,0,0,1,78,46c20.28,0,37.31,10.83,44.45,28.27a6,6,0,0,0,11.1,0C140.69,56.83,157.72,46,178,46a48.05,48.05,0,0,1,48,48C226,149.72,144.41,199.64,128,209.11Z"></path>
+                                    </svg>
+
+                                    <svg class="bg-gray-200 rounded-full p-1 hover:fill-zinc-500 transition cursor-pointer"
+                                         xmlns="http://www.w3.org/2000/svg" width="33" height="33"
+                                         fill="#2b2b2b" viewBox="0 0 256 256">
+                                        <path d="M236.24,179.76a6,6,0,0,1,0,8.48l-24,24a6,6,0,0,1-8.48-8.48L217.52,190H200.94a70.16,70.16,0,0,1-57-29.31l-41.71-58.4A58.11,58.11,0,0,0,55.06,78H32a6,6,0,0,1,0-12H55.06a70.16,70.16,0,0,1,57,29.31l41.71,58.4A58.11,58.11,0,0,0,200.94,178h16.58l-13.76-13.76a6,6,0,0,1,8.48-8.48Zm-92.06-74.41a5.91,5.91,0,0,0,3.48,1.12,6,6,0,0,0,4.89-2.51l1.19-1.67A58.11,58.11,0,0,1,200.94,78h16.58L203.76,91.76a6,6,0,1,0,8.48,8.48l24-24a6,6,0,0,0,0-8.48l-24-24a6,6,0,0,0-8.48,8.48L217.52,66H200.94a70.16,70.16,0,0,0-57,29.31L142.78,97A6,6,0,0,0,144.18,105.35Zm-32.36,45.3a6,6,0,0,0-8.37,1.39l-1.19,1.67A58.11,58.11,0,0,1,55.06,178H32a6,6,0,0,0,0,12H55.06a70.16,70.16,0,0,0,57-29.31l1.19-1.67A6,6,0,0,0,111.82,150.65Z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="image-box mb-6">
+                                <img class="max-w-52 mx-auto" src="{{ products.image.url }}"
+                                     alt="{{ products.name }}"/>
+                            </div>
+
+                            <div class="space-y-5">
+        <span class="mb-2 h-8 md:h-10 flex justify-between">
+            <a href="#" class="flex flex-col gap-y-2">
+                <span class="text-sm font-semibold text-zinc-800">{{ products.name }}</span>
+                <span class="text-xs text-zinc-500">{{ products.description }}</span>
+            </a>
+           
+        </span>
+
+                                <div class="flex items-center gap-x-2">
+                                    <div class="flex justify-center gap-x-1 font-semibold text-zinc-800">
+                                        <div>{{ products.price }}</div>
+                                        <div>تومان</div>
+                                    </div>
+                                </div>
+
+                                <a href="{% url 'product:most_product_detail' products.id %}"
+                                   class="flex items-center justify-center gap-x-1 text-sm w-full py-2 px-2 rounded-lg text-white bg-blue-500 hover:bg-blue-400 transition">
+                                    خرید محصول
+                                </a>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- off slider -->
+    <div>
+        <!-- top slider -->
+        <div class="px-4 py-2 w-fit mx-auto gap-x-1 font-bold text-2xl md:text-4xl mb-2 text-blue-600 relative">
+            <div class="z-50" style="z-index: 99999999;">
+                آخرین پیشنهاد
+            </div>
+            <img class="absolute w-6 md:w-8 -left-5 -top-2 z-0" src="{% static 'image/star.png' %}" alt="">
+        </div>
+        <!-- slider -->
+        <div class="flex flex-col md:flex-row gap-4 px-3">
+            <div class="flex flex-col justify-center items-center mx-auto w-full sm:w-6/12 md:w-2/12 bg-blue-600 rounded-xl">
+                <img class="w-5/12" src="{% static 'image/FeaturedPromos.svg' %}" alt="">
+                <img class="w-10/12" src="{% static 'image/Electronics.webp' %}" alt="">
+            </div>
+            <div class="swiper offSlider w-full md:w-10/12">
+                <div class="swiper-wrapper">
+                    <div class="swiper-wrapper">
+                        {% for product in producted %}
+                            <div class="swiper-slide">
+                                <div class="card swiper-slide bg-white border border-zinc-300 rounded-xl p-3">
+                                    <div class="lg:flex items-center justify-between">
+                                        <img class="w-full max-w-96 mx-auto" src="{{ product.image.url }}"
+                                             alt="{{ product.name }}">
+                                        <div class="space-y-5 lg:space-y-12 w-full px-10">
+                    <span class="lg:flex justify-between items-center">
+                        <a href="" class="flex flex-col gap-y-2">
+                            <span class="lg:text-2xl text-zinc-800">{{ product.name }}</span>
+                            <span class="text-sm lg:text-base text-zinc-500">{{ product.description }}</span>
+                        </a>
+                        <div class="countdown flex flex-row-reverse justify-center gap-x-3 mt-5 lg:mt-0 lg:text-lg">
+                            <div class="days-container flex flex-col justify-center items-center bg-zinc-50 shadow-lg w-12 py-3 px-7 gap-y-2 rounded-md">
+                                <div class="days-label">روز</div>
+                                <span id="days"></span>
+                            </div>
+                            <div class="hours-container flex flex-col justify-center items-center bg-zinc-50 shadow-lg w-12 px-7 gap-y-2 rounded-md">
+                                <div class="hours-label">ساعت</div>
+                                <span id="hours"></span>
+                            </div>
+                            <div class="minutes-container flex flex-col justify-center items-center bg-zinc-50 shadow-lg w-12 px-7 gap-y-2 rounded-md">
+                                <div class="minutes-label">دقیقه</div>
+                                <span id="minutes"></span>
+                            </div>
+                            <div class="seconds-container flex flex-col justify-center items-center text-red-500 bg-zinc-50 shadow-lg w-12 px-7 gap-y-2 rounded-md">
+                                <div class="seconds-label">ثانیه</div>
+                                <span id="seconds"></span>
+                            </div>
+                        </div>
+                    </span>
+                                            <div class="flex flex-col-reverse lg:flex-row justify-center lg:justify-between gap-y-5">
+                                                <a href="{% url 'product:most_product_detail' product.id %}"
+                                                   class="flex items-center justify-center lg:text-lg gap-x-1 w-fit py-3 px-16 mx-auto lg:mx-0 lg:px-20 rounded-lg shadow-lg text-white bg-blue-500 hover:bg-blue-400 transition">
+                                                    خرید محصول
+                                                </a>
+                                                <div class="flex items-center justify-center gap-x-5">
+                                                    <div class="border-l pl-5 flex gap-x-3">
+                                                        <div class="flex flex-col justify-center items-center">
+                                                            <div class="text-lg text-blue-500 font-semibold">{{ product.sales_count }}</div>
+                                                            <div class="text-gray-500">فروش</div>
+                                                        </div>
+                                                        <div class="flex flex-col justify-center items-center">
+                                                            <div class="text-lg text-green-600 font-semibold">{{ product.satisfaction_percentage }}%</div>
+                                                            <div class="text-gray-500">رضایت</div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="flex justify-center gap-x-1 text-zinc-800 lg:text-xl font-semibold">
+                                                            <div>{{ product.discount_price }}</div>
+                                                            <div>تومان</div>
+                                                        </div>
+                                                        {% if product.discount_price %}
+                                                            <div class="flex justify-center gap-x-1 text-zinc-400 lg:text-lg">
+                                                                <div class="line-through">{{ product.price }}</div>
+                                                                <div class="line-through">تومان</div>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 1 banner -->
+    <div class="my-10 px-3">
+        <a href="">
+            <img class="rounded-lg" src="{% static 'image/banner/11.jpg' %}" alt="">
+        </a>
+    </div>
+    <!-- blog -->
+    <div class="px-3">
+        <!-- top blog -->
+        <div class="flex justify-between items-center pb-3">
+            <div class="px-4 py-2 flex justify-center items-center gap-x-1 font-bold md:text-lg text-zinc-700 relative">
+                <div class="z-10">
+                    خواندنی ها
+                </div>
+                <div class="w-20 h-2 bg-blue-300 shadow-lg absolute right-5 top-5 rounded-sm">
+                </div>
+            </div>
+            <a href="{% url 'blog:blog' %}">
+                <div class="transition px-4 py-2 flex justify-center items-center text-zinc-700 hover:text-zinc-600">
+                    مشاهده همه
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#292929" viewBox="0 0 256 256">
+                        <path d="M164.24,203.76a6,6,0,1,1-8.48,8.48l-80-80a6,6,0,0,1,0-8.48l80-80a6,6,0,0,1,8.48,8.48L88.49,128Z"></path>
+                    </svg>
+                </div>
+            </a>
+        </div>
+        <!-- blogs -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {% for post in blog_posts %}
+                <div class="bg-white rounded-2xl border border-zinc-300 group">
+                    <div class="image-box">
+                        <img class="rounded-t-2xl" src="{{ post.image.url }}" alt=""/>
+                    </div>
+                    <div class="p-2 md:p-4 mt-2">
+                        <a href="{{ post.get_absolute_url }}" class="font-semibold text-zinc-800">
+                            {{ post.title }}
+                        </a>
+                        <div class="flex items-center justify-around mt-2">
+                            <div class="text-xs text-zinc-500">
+                                {{ post.get_publish_date_shamsi }}
+                            </div>
+                            <a href="{% url 'blog:blog-detail' post.slug %}"
+                               class="flex items-center justify-center gap-x-1 text-sm w-fit py-2 px-5 mr-auto rounded-lg text-white bg-blue-500 hover:bg-blue-400 transition">
+                                ادامه خواندن
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% include 'includes/footer.html' %}
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+
+<!-- HERO SLIDER -->
+<script src="{% static 'js/swiper.min.js' %}"></script>
+<script src="{% static 'js/sliders.js' %}"></script>
+</html>

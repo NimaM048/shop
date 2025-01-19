@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درباره ما</title>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body class="max-w-[1600px] mx-auto bg-[#fcfcfc]">
+<header class="fixed w-full max-w-[1600px] border-b z-50 bg-white">
+    <!-- search bar -->
+    <div class="items-center z-50 flex-wrap gap-y-5 bg-white rounded-lg overflow-hidden p-2 justify-between drop-shadow-md absolute top-0 left-3 w-11/12 max-w-4xl hidden"
+         id="searchBar">
+        <svg class="fill-blue-500" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill=""
+             viewBox="0 0 256 256">
+            <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+        </svg>
+        <input class="text-base text-gray-700 flex-grow outline-none px-2" type="text"
+               placeholder="نام محصول را وارد کنید"/>
+        <div class="md:flex items-center rounded-lg pl-2 gap-x-2 mx-auto">
+            <select id="category" class="text-sm text-gray-800 outline-none border-2 p-2 rounded-lg cursor-pointer">
+                <option value="all" selected>انتخاب دسته بندی</option>
+                <option value="mobile">موبایل</option>
+                <option value="home">لوازم خانگی</option>
+                <option value="laptop">لپ تاپ</option>
+            </select>
+            <button class="bg-blue-500 hover:bg-blue-400 transition text-white rounded-lg px-4 py-2 md:px-6 md:py-2 text-sm">
+                جستجو
+            </button>
+        </div>
+    </div>
+    <!-- header -->
+    {% include 'includes/header.html' %}
+</header>
+<main class="pt-20 md:pt-40 lg:pt-[73px]">
+    <div class="bg-white shadow-large lg:my-10 mx-5 rounded-xl md:rounded-2xl p-3 md:p-5 border">
+        <div class="relative flex justify-center items-center mb-5">
+            <img class="w-full h-96 md:h-[500px] object-center object-cover rounded-xl blur-sm"
+                 src="{% static 'image/workspace.jpg' %}" alt="">
+            <div class="absolute top-0 bg-zinc-400 bg-opacity-50 w-full h-full flex justify-center items-center text-white font-semibold rounded-xl">
+                <div class="text-center space-y-5">
+                    <div class="text-3xl sm:text-3xl md:text-5xl">سورنا تقدیم می کند</div>
+                    <div class="text-xl sm:text-2xl md:text-4xl">به شرکت مهندسی و فروشگاهی سورنا خوش آمدید</div>
+                </div>
+            </div>
+        </div>
+        <div class="leading-10">
+            {% for section in about_us_sections %}
+                <div class="mb-2 mt-4 text-lg font-semibold text-zinc-800">
+                    {{ section.title }}
+                </div>
+                <div class="leading-8 text-zinc-700" style="line-height: 1.8rem;">
+                    {{ section.content|safe }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% include 'includes/footer.html' %}
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>

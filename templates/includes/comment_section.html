@@ -1,0 +1,86 @@
+{% load static %}
+<div class="p-4 border-b" id="comments">
+    <span class="border-b-blue-300 border-b text-zinc-800">دیدگاه ها</span>
+    <div class="lg:flex gap-5">
+        <!-- Left Section: Comment Form -->
+        <div class="lg:w-3/12 py-5">
+            <div class="flex items-start gap-x-1 text-sm text-zinc-600">
+            </div>
+            <div class="mt-6 mb-4 text-lg font-semibold text-zinc-800 relative">
+                <span class="absolute left-0 top-1/2 transform -translate-y-1/2 w-8 h-[2px] bg-blue-500"></span>
+                <span class="relative z-10 px-3 text-sm text-zinc-700">
+        شما هم دیدگاه خود را ثبت کنید
+    </span>
+            </div>
+
+            <form method="post" action="{% url 'product:add_comment' product.id %}" class="space-y-3">
+                {% csrf_token %}
+                <input type="text" name="title" placeholder="عنوان دیدگاه"
+                       class="focus:shadow-primary-outline text-sm leading-5.6 block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all focus:border-blue-300 focus:outline-none"
+                       required>
+                <ul class="grid my-3 gap-5 grid-cols-2">
+                    <li>
+                        <input type="radio" id="yes" name="recommendation" value="yes" class="hidden peer"
+                               required>
+                        <label for="yes"
+                               class="inline-flex items-center justify-center w-full px-2 py-3 text-gray-600 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-green-400 peer-checked:text-green-500 hover:text-gray-600 hover:bg-gray-100">
+                            <div class="flex items-center gap-x-1">
+                                <div class="text-sm">پیشنهاد میشود</div>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" id="no" name="recommendation" value="no" class="hidden peer"
+                               required>
+                        <label for="no"
+                               class="inline-flex items-center justify-center w-full px-2 py-3 text-gray-600 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-red-400 peer-checked:text-red-400 hover:text-gray-600 hover:bg-gray-100">
+                            <div class="flex items-center gap-x-1">
+                                <div class="text-sm">پیشنهاد نمیشود</div>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+                <textarea name="content" placeholder="متن دیدگاه" cols="30" rows="7"
+                          class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all focus:border-blue-400 focus:outline-none"
+                          required></textarea>
+                <button type="submit"
+                        class="mx-auto w-full px-2 py-3 mt-5 text-sm bg-blue-500 hover:bg-blue-400 transition text-gray-100 rounded-lg">
+                    ارسال
+                </button>
+            </form>
+        </div>
+
+        <!-- Right Section: Display Comments -->
+        <div class="lg:w-9/12 divide-y-2 divide-blue-600">
+            {% for comment in comments %}
+                <div class="px-2 pt-5">
+                    <div class="text-lg text-zinc-700">{{ comment.title }}</div>
+                    <div class="mt-2 flex gap-x-4 items-center border-b pb-3">
+                        <div class="text-xs text-zinc-600">{{ comment.created_at|date:"j F Y" }}</div>
+                        <div class="text-xs text-zinc-600">{{ comment.user.get_full_name }}</div>
+                        {% if comment.user.is_verified %}
+                            <div class="text-xs text-zinc-50 bg-green-400 rounded-full px-2 py-1">خریدار</div>
+                        {% endif %}
+                    </div>
+                    <div class="flex items-center gap-x-1 pt-3">
+                        {% if comment.recommendation == 'yes' %}
+                            <svg class="fill-green-500" xmlns="http://www.w3.org/2000/svg" width="22"
+                                 height="22"
+                                 viewBox="0 0 256 256"></svg>
+                            <div class="text-sm text-green-500">پیشنهاد میشود</div>
+                        {% else %}
+                            <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                 viewBox="0 0 256 256"></svg>
+                            <div class="text-sm text-red-500">پیشنهاد نمیشود</div>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <div class="mt-2 text-zinc-600 text-sm">{{ comment.content }}</div>
+                    <br>
+                </div>
+            {% empty %}
+                <div class="text-center text-gray-500 py-5">هنوز دیدگاهی ثبت نشده است.</div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

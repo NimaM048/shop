@@ -1,0 +1,250 @@
+{% load static %}
+
+<div class="flex flex-row-reverse sm:flex-row items-center justify-between py-4 max-w-[1600px] gap-y-5 flex-wrap lg:flex-nowrap">
+    <!-- btn menu mobile -->
+    <svg class="order-2 sm:order-none md:hidden" onclick="showNavbar()" xmlns="http://www.w3.org/2000/svg" width="32"
+         height="32" fill="#000000" viewBox="0 0 256 256">
+        <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
+    </svg>
+    <!-- navbar moblie -->
+    <div class="flex absolute w-full h-screen z-50 -right-full top-0 transition-all ease-out duration-500" id="navbar">
+        <div class="bg-white w-9/12 h-screen py-5 drop-shadow-2xl max-w-md">
+            <div class="mx-auto mb-5">
+                <a href="{% url 'home:home' %}">
+                    <img class="w-44 mx-auto" src="{% static 'image/mehrara.webp' %}" alt="">
+                </a>
+            </div>
+            <ul class="flex flex-col gap-y-3 px-2">
+                <li class="text-zinc-700 hover:text-zinc-900 hover:bg-gray-200 transition p-2 rounded-lg">
+                    <a href="{% url 'home:home' %}">
+                        صفحه اصلی
+                    </a>
+                </li>
+                <li class="text-zinc-700 hover:text-zinc-900 group">
+                    <a class="relative">
+                        <div class="flex gap-x-1 items-center hover:bg-gray-200 transition p-2 rounded-lg">
+                            فروشگاه
+                            <svg class="group-hover:rotate-180 transition-all duration-500"
+                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000"
+                                 viewBox="0 0 256 256">
+                                <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+                            </svg>
+                        </div>
+                        {% for category in category %}
+                            <div class="bg-white hidden group-hover:flex flex-col p-2 absolute top-14 w-44 rounded-lg shadow-xl">
+                                <a class="hover:bg-blue-500 hover:text-gray-50 px-2 py-1 rounded-md mb-1 transition-all"
+                                   href="{% url 'product:all_products' %}?category={{ category.name }}">
+                                    {{ category.name }}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </a>
+                </li>
+                <li class="text-zinc-700 hover:text-zinc-900 hover:bg-gray-200 transition p-2 rounded-lg">
+                    <a href="#">
+                        شگفت انگیز ها
+                    </a>
+                </li>
+                <li class="text-zinc-700 hover:text-zinc-900 hover:bg-gray-200 transition p-2 rounded-lg">
+                    <a href="{% url 'home:aboutus' %}">
+                        درباره ی با ما
+                    </a>
+                </li>
+                <li class="text-zinc-700 hover:text-zinc-900 hover:bg-gray-200 transition p-2 rounded-lg">
+                    <a href="{% url 'home:contactus' %}">
+                        ارتباط با ما
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="bg-white/30 w-3/12 sm:w-5/12 backdrop-blur-sm" onclick="bgNavbar()">
+        </div>
+    </div>
+    <!-- logo -->
+    <div class="order-2 pr-5 md:pr-10">
+        <a href="{% url 'home:home' %}">
+            <img class="w-32 md:w-44" src="{% static 'image/logo.png' %}" alt="">
+        </a>
+    </div>
+    <!-- menu -->
+    <div class="hidden md:block order-3 lg:order-2 mt-5 lg:mt-0">
+        <ul class="flex gap-x-3 lg:gap-x-3 xl:gap-x-5">
+            <li class="text-zinc-700 hover:text-blue-600 hover:bg-gray-100 transition p-2 rounded-lg">
+                <a href="{% url 'home:home' %}">
+                    صفحه اصلی
+                </a>
+            </li>
+            <li class="text-zinc-700 transition group">
+                <a class="relative block" href="./search.html">
+                    <div class="flex gap-x-1 items-center group-hover:text-blue-600 hover:bg-gray-200 transition p-2 rounded-lg">
+                        <svg class="group-hover:fill-blue-500 transition" xmlns="http://www.w3.org/2000/svg" width="18"
+                             height="18" fill="#000000" viewBox="0 0 256 256">
+                            <path d="M136,120v56a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0ZM239.86,98.11,226,202.12A16,16,0,0,1,210.13,216H45.87A16,16,0,0,1,30,202.12l-13.87-104A16,16,0,0,1,32,80H68.37L122,18.73a8,8,0,0,1,12,0L187.63,80H224a16,16,0,0,1,15.85,18.11ZM89.63,80h76.74L128,36.15ZM224,96H32L45.87,200H210.13Zm-51.16,23.2-5.6,56A8,8,0,0,0,174.4,184a7.44,7.44,0,0,0,.81,0,8,8,0,0,0,7.95-7.2l5.6-56a8,8,0,0,0-15.92-1.6Zm-89.68,0a8,8,0,0,0-15.92,1.6l5.6,56a8,8,0,0,0,8,7.2,7.44,7.44,0,0,0,.81,0,8,8,0,0,0,7.16-8.76Z"></path>
+                        </svg>
+                        فروشگاه
+                        <svg class="group-hover:rotate-180 transition-all duration-500 group-hover:fill-blue-500"
+                             xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#000000"
+                             viewBox="0 0 256 256">
+                            <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+                        </svg>
+                    </div>
+                    {% for category in category %}
+                        <div class="bg-white hidden group-hover:flex flex-col p-2 absolute top-14 w-44 rounded-lg shadow-xl">
+                            <a class="hover:bg-blue-500 hover:text-gray-50 px-2 py-1 rounded-md mb-1 transition-all"
+                               href="{% url 'product:all_products' %}?category={{ category.name }}">
+                                {{ category.name }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </a>
+            </li>
+            <li class="text-zinc-700 hover:text-blue-600 hover:bg-gray-100 transition p-2 rounded-lg">
+                <a href="./search.html">
+                    شگفت انگیز ها
+                </a>
+            </li>
+            <li class="text-zinc-700 hover:text-blue-600 hover:bg-gray-100 transition p-2 rounded-lg">
+                <a href="{% url 'home:aboutus' %}">
+                    درباره ی با ما
+                </a>
+            </li>
+            <li class="text-zinc-700 hover:text-blue-600 hover:bg-gray-100 transition p-2 rounded-lg">
+                <a href="{% url 'home:contactus' %}">
+                    ارتباط با ما
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- buttonn -->
+    <div class="flex items-center justify-center gap-x-5 order-1 sm:order-2 pl-5 md:pl-10">
+        <!-- search -->
+        <button class="flex items-center p-2 rounded-xl bg-blue-500 hover:bg-blue-400 transition shadow-lg shadow-blue-500/50 group relative"
+                type="button" onclick="searchBTN()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#ffffff" viewBox="0 0 256 256">
+                <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+            </svg>
+        </button>
+        <!-- card -->
+        <a href="{% url 'product:cart_detail' %}">
+            <div class="flex items-center p-2 rounded-xl bg-blue-500 hover:bg-blue-400 transition shadow-lg shadow-blue-500/50 group relative">
+                <button class="relative">  
+            <span class="cursor-pointer">  
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#ffffff" viewBox="0 0 256 256">  
+                    <path d="M134,120v56a6,6,0,0,1-12,0V120a6,6,0,0,1,12,0ZM237.88,97.85,224,201.85A14,14,0,0,1,210.13,214H45.87A14,14,0,0,1,32,201.85l-13.87-104A14,14,0,0,1,32,82H69.28l54.2-61.95a6,6,0,0,1,9,0l54.2,62H224a14,14,0,0,1,13.87,15.85ZM85.22,82h85.56L128,33.11ZM225.5,94.68A2,2,0,0,0,224,94H32a2,2,0,0,0-1.51.68A2,2,0,0,0,30,96.26l13.86,104a2,2,0,0,0,2,1.73H210.13a2,2,0,0,0,2-1.73L226,96.26A1.93,1.93,0,0,0,225.5,94.68ZM181.4,114a6,6,0,0,0-6.57,5.37l-5.6,56A6,6,0,0,0,174.6,182l.61,0a6,6,0,0,0,6-5.4l5.6-56A6,6,0,0,0,181.4,114ZM81.17,119.4a6,6,0,0,0-11.94,1.2l5.6,56a6,6,0,0,0,6,5.4l.61,0a6,6,0,0,0,5.37-6.57Z"></path>  
+                </svg>  
+            </span>
+                    <span class="absolute -right-3 -top-3 flex h-5 w-5 drop-shadow-lg cursor-pointer items-center justify-center rounded-full bg-white text-sm font-semibold text-blue-500">  
+                {{ items_count }} <!-- Display total items in the cart -->  
+            </span>
+                </button>
+            </div>
+        </a>
+        <!-- Account -->
+        {% if request.user.is_authenticated %}
+            <div class="flex items-center py-2 px-2 rounded-xl bg-blue-500 hover:bg-blue-400 transition shadow-lg shadow-blue-500/50 group relative">
+            <button class="text-gray-100 flex gap-x-1 items-center" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#ffffff" viewBox="0 0 256 256">
+                    <path d="M229.19,213c-15.81-27.32-40.63-46.49-69.47-54.62a70,70,0,1,0-63.44,0C67.44,166.5,42.62,185.67,26.81,213a6,6,0,1,0,10.38,6C56.4,185.81,90.34,166,128,166s71.6,19.81,90.81,53a6,6,0,1,0,10.38-6ZM70,96a58,58,0,1,1,58,58A58.07,58.07,0,0,1,70,96Z"></path>
+                </svg>
+                <span class="hidden md:block text-sm">
+              حساب کاربری
+            </span>
+            </button>
+            <div class="z-50 group-hover:block left-0 top-[39px] w-60 rounded-lg bg-white shadow-lg hidden absolute">
+                <ul class="space-y-1 p-2">
+                    <li>
+                        <a class="flex items-center justify-between gap-x-2 rounded-lg p-2 text-zinc-700 hover:text-zinc-800 transition hover:bg-gray-100"
+                           href="{% url 'user_login:profile' %}">
+                  <span class="flex items-center gap-x-2">
+                    <span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#4d4d4d"
+                           viewBox="0 0 256 256"><path
+                              d="M229.19,213c-15.81-27.32-40.63-46.49-69.47-54.62a70,70,0,1,0-63.44,0C67.44,166.5,42.62,185.67,26.81,213a6,6,0,1,0,10.38,6C56.4,185.81,90.34,166,128,166s71.6,19.81,90.81,53a6,6,0,1,0,10.38-6ZM70,96a58,58,0,1,1,58,58A58.07,58.07,0,0,1,70,96Z"></path></svg>
+                    </span>
+                      {% if request.user.fullname %}
+                          <span class="text-sm">{{ request.user.fullname }}</span>
+                      {% else %}
+                          <span class="text-sm">{{ request.user.phone }}</span>
+                      {% endif %}
+                          
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center justify-between gap-x-2 rounded-lg p-2 text-zinc-700 hover:text-zinc-800 transition hover:bg-gray-100"
+                           href="{% url 'user_login:order_profile' %}">
+                  <span class="flex items-center gap-x-2">
+                    <span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#4d4d4d"
+                           viewBox="0 0 256 256"><path
+                              d="M237.9,198.36l-14.25-120a14.06,14.06,0,0,0-14-12.36H174V64a46,46,0,0,0-92,0v2H46.33a14.06,14.06,0,0,0-14,12.36l-14.25,120a14,14,0,0,0,14,15.64H223.92a14,14,0,0,0,14-15.64ZM94,64a34,34,0,0,1,68,0v2H94ZM225.5,201.3a2.07,2.07,0,0,1-1.58.7H32.08a2.07,2.07,0,0,1-1.58-.7,1.92,1.92,0,0,1-.49-1.53l14.26-120A2,2,0,0,1,46.33,78H209.67a2,2,0,0,1,2.06,1.77l14.26,120A1.92,1.92,0,0,1,225.5,201.3Z"></path></svg>
+                    </span>
+                    <span class="text-sm">سفارش ها</span>
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center justify-between gap-x-2 rounded-lg p-2 text-zinc-700 hover:text-zinc-800 transition hover:bg-gray-100"
+                           href="{% url 'user_login:address_profile' %}">
+        <span class="flex items-center gap-x-2">
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#4d4d4d" viewBox="0 0 256 256">
+                    <path d="M128,20a76,76,0,0,0-76,76c0,27.93,15.94,57.77,47.41,89.19a273.51,273.51,0,0,0,24.57,22.8,6,6,0,0,0,8,0,273.51,273.51,0,0,0,24.57-22.8C188.06,153.77,204,123.93,204,96A76,76,0,0,0,128,20Zm0,200.41a263.65,263.65,0,0,1-22.55-20.9C75.06,149.44,60,121.29,60,96a68,68,0,0,1,136,0c0,25.29-15.06,53.44-45.45,83.51A263.65,263.65,0,0,1,128,220.41ZM128,64a32,32,0,1,0,32,32A32,32,0,0,0,128,64Zm0,52a20,20,0,1,1,20-20A20,20,0,0,1,128,116Z"></path>
+                </svg>
+            </span>
+            <span class="text-sm">آدرس ها</span>
+        </span>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a class="flex items-center justify-between gap-x-2 rounded-lg p-2 text-zinc-700 hover:text-zinc-800 transition hover:bg-gray-100"
+                           href="{% url 'user_login:message_profile' %}">
+        <span class="flex items-center gap-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#4d4d4d" viewBox="0 0 256 256">
+                <path d="M227.33,91l-96-64a6,6,0,0,0-6.66,0l-96,64A6,6,0,0,0,26,96V200a14,14,0,0,0,14,14H216a14,14,0,0,0,14-14V96A6,6,0,0,0,227.33,91ZM100.18,152,38,195.9V107.65Zm12.27,6h31.1l62.29,44H50.16Zm43.37-6L218,107.65V195.9ZM128,39.21l85.43,57L143.53,146H112.47L42.57,96.17Z"></path>
+            </svg>
+            <span>پیغام ها</span>
+        </span>
+                            <span class="relative flex h-5 w-5">
+            {% if message_count > 0 %}
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-75"></span>
+                <span class="relative inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-500 text-sm text-white">
+                    {{ message_count }}
+                </span>
+            {% endif %}
+        </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="flex items-center justify-between gap-x-2 rounded-lg p-2 text-red-500 hover:text-red-600 transition hover:bg-red-100"
+                           href="{% url 'user_login:logout' %}">  <!-- Update the href to point to the logout URL -->
+                            <div class="flex items-center gap-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#4d4d4d"
+                                     viewBox="0 0 256 256">
+                                    <path d="M110,216a6,6,0,0,1-6,6H48a14,14,0,0,1-14-14V48A14,14,0,0,1,48,34h56a6,6,0,0,1,0,12H48a2,2,0,0,0-2,2V208a2,2,0,0,0,2,2h56A6,6,0,0,1,110,216Zm110.24-92.24-40-40a6,6,0,0,0-8.48,8.48L201.51,122H104a6,6,0,0,0,0,12h97.51l-29.75,29.76a6,6,0,1,0,8.48,8.48l40-40A6,6,0,0,0,220.24,123.76Z"></path>
+                                </svg>
+                                <span>خروج از حساب کاربری</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {% else %}
+            <div class="flex items-center py-2 px-2 rounded-xl bg-blue-500 hover:bg-blue-400 transition shadow-lg shadow-blue-500/50 group relative">
+                <a href="{% url 'user_login:login' %}" class="text-gray-100 flex gap-x-1 items-center" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#ffffff" viewBox="0 0 256 256">
+                        <path d="M229.19,213c-15.81-27.32-40.63-46.49-69.47-54.62a70,70,0,1,0-63.44,0C67.44,166.5,42.62,185.67,26.81,213a6,6,0,1,0,10.38,6C56.4,185.81,90.34,166,128,166s71.6,19.81,90.81,53a6,6,0,1,0,10.38-6ZM70,96a58,58,0,1,1,58,58A58.07,58.07,0,0,1,70,96Z"></path>
+                    </svg>
+                    <span class="hidden md:block text-sm">
+              ثبت نام و ورود
+            </span>
+                </a>
+            </div>
+        {% endif %}
+
+        </div>
+    </div>
+</div>

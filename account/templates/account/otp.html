@@ -1,0 +1,136 @@
+{% load static %}
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <title>ورود</title>
+</head>
+<body class="bg-[#fcfcfc]" style="background-image: linear-gradient(120deg, #e3eeff 0%, #f7fbfd 100%);">
+<div class="h-screen flex justify-center items-center">
+    <div class="bg-white rounded-2xl border w-11/12 sm:w-7/12 md:w-6/12 lg:w-4/12 xl:w-3/12 h-auto py-5 px-4">
+        <!-- Logo Section -->
+        <img class="w-44 mx-auto" src="{% static 'image/logo.png' %}" alt="Logo">
+
+        <!-- Title -->
+        <div class="mt-5 text-lg font-semibold text-zinc-800">
+            ورود | ثبت نام
+        </div>
+
+        <!-- Timer -->
+        <!-- Circular Timer -->
+        <div class="flex flex-col items-center mt-4">
+            <div class="relative w-24 h-24">
+                <svg class="absolute top-0 left-0 w-full h-full transform -rotate-90"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <circle
+                            cx="50%"
+                            cy="50%"
+                            r="45%"
+                            stroke="#e5e7eb"
+                            stroke-width="6"
+                            fill="none"
+                    ></circle>
+                    <circle
+                            id="otp-timer-circle"
+                            cx="50%"
+                            cy="50%"
+                            r="45%"
+                            stroke="#3b82f6"
+                            stroke-width="6"
+                            fill="none"
+                            stroke-dasharray="282.74"
+                            stroke-dashoffset="0"
+                            stroke-linecap="round"
+                    ></circle>
+                </svg>
+                <div
+                        id="otp-timer-text"
+                        class="absolute top-0 left-0 flex items-center justify-center w-full h-full text-sm font-semibold text-gray-700"
+                >
+                    5:00
+                </div>
+            </div>
+            <br>
+            <div id="otp-expired-text" class="hidden mt-2 text-red-500 text-xs">
+                کد OTP منقضی شده است.
+            </div>
+        </div>
+
+
+        <!-- Form -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="flex flex-col gap-y-1">
+                <!-- Input Field with Errors -->
+                {{ form.code }}
+                {% if form.code.errors %}
+                    <div class="text-red-500 text-xs mt-1">
+                        {% for error in form.code.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <!-- Submit Button -->
+            <button class="mx-auto w-full px-2 py-2 mt-8 text-sm bg-blue-500 hover:bg-blue-400 transition text-gray-100 rounded-lg">
+                ورود
+            </button>
+        </form>
+
+        <!-- Terms and Conditions -->
+        <div class="mt-8 text-xs text-zinc-500">
+            ورود شما به معنای پذیرش
+            <a class="text-red-400 hover:text-red-500 transition" href="">قوانین و مقررات</a> سورنا میباشد.
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    const totalTime = 5 * 60 * 1000; // 5 minutes in milliseconds
+    const expirationTime = Date.now() + totalTime;
+
+    // Circle circumference for the stroke animation
+    const circle = document.getElementById("otp-timer-circle");
+    const circleLength = 2 * Math.PI * circle.r.baseVal.value; // Circle length for 45% radius
+    circle.style.strokeDasharray = circleLength;
+
+    // Update the timer
+    function updateCircularTimer() {
+        const now = Date.now();
+        const timeLeft = expirationTime - now;
+
+        if (timeLeft <= 0) {
+            // Timer expired
+            document.getElementById("otp-timer-text").innerText = "0:00";
+            document.getElementById("otp-expired-text").classList.remove("hidden");
+            circle.style.strokeDashoffset = circleLength;
+            circle.style.stroke = "#ef4444"; // Change stroke color to red
+            document.querySelector('button[type="submit"]').disabled = true;
+            return;
+        }
+
+        // Update time text
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        document.getElementById("otp-timer-text").innerText = `${minutes}:${seconds
+            .toString()
+            .padStart(2, "0")}`;
+
+        // Update circle animation
+        const progress = timeLeft / totalTime;
+        circle.style.strokeDashoffset = circleLength * (1 - progress);
+    }
+
+    // Run timer updates
+    setInterval(updateCircularTimer, 1000);
+    updateCircularTimer(); // Initial call
+
+</script>
+</body>
+</html>

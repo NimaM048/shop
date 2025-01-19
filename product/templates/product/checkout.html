@@ -1,0 +1,266 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسویه حساب</title>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body class="max-w-[1600px] mx-auto bg-[#fcfcfc]">
+<header class="fixed w-full max-w-[1600px] border-b z-50 bg-white">
+    <!-- search bar -->
+    {% include 'includes/search.html' %}
+    <!-- header -->
+    {% include 'includes/header.html' %}
+</header>
+<main class="pt-20 md:pt-40 lg:pt-[73px]">
+    <!-- main -->
+    <div class="lg:px-20 lg:my-10 md:flex gap-5 px-5">
+        <div class="md:w-8/12 px-2 sm:px-3 flex flex-col gap-y-7">
+            <!-- name -->
+            <div class="text-zinc-800 text-lg font-semibold bg-white shadow-large rounded-xl p-3">
+                تسویه حساب
+                <div>
+                    <a class="text-sm text-zinc-500 hover:text-zinc-700 transition" href="">
+                        سبد خرید
+                    </a>
+                    <span class="text-sm text-zinc-500">
+              /
+            </span>
+                    <a class="text-sm text-zinc-500 hover:text-zinc-700 transition" href="">
+                        تسویه حساب
+                    </a>
+                </div>
+            </div>
+            <div class="shadow-large p-4 rounded-lg bg-white">
+                <div class="sm:flex gap-x-5 mt-5">
+                    <div class="sm:w-1/2 mb-2 sm:mb-0 flex flex-col gap-y-1">
+                        <label class="text-zinc-700 flex">
+                            نام
+                            <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                 fill="#4d4d4d" viewBox="0 0 256 256">
+                                <path d="M210.23,101.57l-72.6,29,51.11,65.71a6,6,0,0,1-9.48,7.36L128,137.77,76.74,203.68a6,6,0,1,1-9.48-7.36l51.11-65.71-72.6-29a6,6,0,1,1,4.46-11.14L122,119.14V40a6,6,0,0,1,12,0v79.14l71.77-28.71a6,6,0,1,1,4.46,11.14Z"></path>
+                            </svg>
+                        </label>
+                        <input type="text" name=""
+                               class="focus:shadow-primary-outline text-sm leading-5.6 block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all focus:border-blue-300 focus:outline-none">
+                    </div>
+                    <div class="sm:w-1/2 flex flex-col gap-y-1">
+                        <label class="text-zinc-700 flex">
+                            نام خانوادگی
+                            <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                 fill="#4d4d4d" viewBox="0 0 256 256">
+                                <path d="M210.23,101.57l-72.6,29,51.11,65.71a6,6,0,0,1-9.48,7.36L128,137.77,76.74,203.68a6,6,0,1,1-9.48-7.36l51.11-65.71-72.6-29a6,6,0,1,1,4.46-11.14L122,119.14V40a6,6,0,0,1,12,0v79.14l71.77-28.71a6,6,0,1,1,4.46,11.14Z"></path>
+                            </svg>
+                        </label>
+                        <input type="text" name=""
+                               class="focus:shadow-primary-outline text-sm leading-5.6 block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all focus:border-blue-300 focus:outline-none">
+                    </div>
+                </div>
+                <div class="sm:flex gap-x-5 mt-7">
+                    <div class="sm:w-1/2 mb-2 sm:mb-0 flex flex-col gap-y-1">
+                        <label class="text-zinc-700 flex">
+                            استان
+                            <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                 fill="#4d4d4d" viewBox="0 0 256 256">
+                                <path d="M210.23,101.57l-72.6,29,51.11,65.71a6,6,0,0,1-9.48,7.36L128,137.77,76.74,203.68a6,6,0,1,1-9.48-7.36l51.11-65.71-72.6-29a6,6,0,1,1,4.46-11.14L122,119.14V40a6,6,0,0,1,12,0v79.14l71.77-28.71a6,6,0,1,1,4.46,11.14Z"></path>
+                            </svg>
+                        </label>
+                        <select name="select"
+                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                            <option value="">-</option>
+                            <option value="2">خراسان رضوی</option>
+                            <option value="">خراسان جنوبی</option>
+                            <option value="">خراسان شمالی</option>
+                            <option value="">تهران</option>
+                        </select>
+                    </div>
+                    <div class="sm:w-1/2 flex flex-col gap-y-1">
+                        <label class="text-zinc-700 flex">
+                            شهر
+                            <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                 fill="#4d4d4d" viewBox="0 0 256 256">
+                                <path d="M210.23,101.57l-72.6,29,51.11,65.71a6,6,0,0,1-9.48,7.36L128,137.77,76.74,203.68a6,6,0,1,1-9.48-7.36l51.11-65.71-72.6-29a6,6,0,1,1,4.46-11.14L122,119.14V40a6,6,0,0,1,12,0v79.14l71.77-28.71a6,6,0,1,1,4.46,11.14Z"></path>
+                            </svg>
+                        </label>
+                        <select name="select"
+                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                            <option value="">تهران</option>
+                            <option value="2">رباط کریم</option>
+                            <option value="">دماوند</option>
+                            <option value="">بومهن</option>
+                            <option value="">رودهن</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-7">
+                    <div class="flex flex-col gap-y-1">
+                        <label class="text-zinc-700 flex">
+                            خیابان و کوچه
+                            <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                 fill="#4d4d4d" viewBox="0 0 256 256">
+                                <path d="M210.23,101.57l-72.6,29,51.11,65.71a6,6,0,0,1-9.48,7.36L128,137.77,76.74,203.68a6,6,0,1,1-9.48-7.36l51.11-65.71-72.6-29a6,6,0,1,1,4.46-11.14L122,119.14V40a6,6,0,0,1,12,0v79.14l71.77-28.71a6,6,0,1,1,4.46,11.14Z"></path>
+                            </svg>
+                        </label>
+                        <input type="text" name=""
+                               class="focus:shadow-primary-outline text-sm leading-5.6 block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all focus:border-blue-300 focus:outline-none">
+                    </div>
+                    <div class="flex flex-col gap-y-1 mt-5">
+                        <label class="text-zinc-700 flex">
+                            شماره پلاک و واحد
+                            <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                 fill="#4d4d4d" viewBox="0 0 256 256">
+                                <path d="M210.23,101.57l-72.6,29,51.11,65.71a6,6,0,0,1-9.48,7.36L128,137.77,76.74,203.68a6,6,0,1,1-9.48-7.36l51.11-65.71-72.6-29a6,6,0,1,1,4.46-11.14L122,119.14V40a6,6,0,0,1,12,0v79.14l71.77-28.71a6,6,0,1,1,4.46,11.14Z"></path>
+                            </svg>
+                        </label>
+                        <input type="text" name=""
+                               class="focus:shadow-primary-outline text-sm leading-5.6 block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all focus:border-blue-300 focus:outline-none">
+                    </div>
+                </div>
+                <div class="sm:flex gap-x-5 mt-5">
+                    <div class="sm:w-1/2 mb-2 sm:mb-0 flex flex-col gap-y-1">
+                        <label class="text-zinc-700 flex">
+                            تلفن
+                            <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                 fill="#4d4d4d" viewBox="0 0 256 256">
+                                <path d="M210.23,101.57l-72.6,29,51.11,65.71a6,6,0,0,1-9.48,7.36L128,137.77,76.74,203.68a6,6,0,1,1-9.48-7.36l51.11-65.71-72.6-29a6,6,0,1,1,4.46-11.14L122,119.14V40a6,6,0,0,1,12,0v79.14l71.77-28.71a6,6,0,1,1,4.46,11.14Z"></path>
+                            </svg>
+                        </label>
+                        <input type="text" name=""
+                               class="focus:shadow-primary-outline text-sm leading-5.6 block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all focus:border-blue-300 focus:outline-none">
+                    </div>
+                    <div class="sm:w-1/2 flex flex-col gap-y-1">
+                        <label class="text-zinc-700 flex">
+                            کد پستی
+                            <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                 fill="#4d4d4d" viewBox="0 0 256 256">
+                                <path d="M210.23,101.57l-72.6,29,51.11,65.71a6,6,0,0,1-9.48,7.36L128,137.77,76.74,203.68a6,6,0,1,1-9.48-7.36l51.11-65.71-72.6-29a6,6,0,1,1,4.46-11.14L122,119.14V40a6,6,0,0,1,12,0v79.14l71.77-28.71a6,6,0,1,1,4.46,11.14Z"></path>
+                            </svg>
+                        </label>
+                        <input type="text" name=""
+                               class="focus:shadow-primary-outline text-sm leading-5.6 block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all focus:border-blue-300 focus:outline-none">
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <div class="flex flex-col gap-y-1">
+                        <label class="text-zinc-700 flex">
+                            توضیحات اضافه
+                        </label>
+                        <textarea placeholder="نکات مهم درباره تحویل محصول" name="mailTicket" cols="30" rows="7"
+                                  class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all focus:border-blue-400 focus:outline-none"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md:w-4/12 mt-8 md:mt-0">
+            <div class="px-2 sm:px-6 py-3 bg-white rounded-xl shadow-large mb-5">
+
+                <div class="px-2 sm:px-6 py-3 bg-white rounded-xl shadow-large">
+                    <div class="flex gap-x-1 items-center text-zinc-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#d02525"
+                             viewBox="0 0 256 256">
+                            <path d="M223.92,208H32.08a8,8,0,0,1-8-8.93l14.25-120a8.06,8.06,0,0,1,8-7.07H209.67a8.06,8.06,0,0,1,8,7.07l14.25,120A8,8,0,0,1,223.92,208Z"
+                                  opacity="0.2"></path>
+                            <path d="M239.89,198.12l-14.26-120a16,16,0,0,0-16-14.12H176a48,48,0,0,0-96,0H46.33a16,16,0,0,0-16,14.12l-14.26,120A16,16,0,0,0,20,210.6a16.13,16.13,0,0,0,12,5.4H223.92A16.13,16.13,0,0,0,236,210.6,16,16,0,0,0,239.89,198.12ZM128,32a32,32,0,0,1,32,32H96A32,32,0,0,1,128,32ZM32,200,46.33,80H80v24a8,8,0,0,0,16,0V80h64v24a8,8,0,0,0,16,0V80h33.75l14.17,120Z"></path>
+                        </svg>
+                        سبد شما
+                    </div>
+                    <div class="flex gap-x-1 justify-between items-center text-zinc-600 mt-5 bg-gray-100 rounded-lg px-2 py-3 text-sm">
+                        <div>
+                            )قیمت کالاها {{ order.total_price|floatformat:0 }})
+                        </div>
+                        <div class="flex gap-x-1">
+                            <div>
+                                {{ order.total_price }}
+                            </div>
+                            <div>
+                                تومان
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if discount_amount %}
+                        <div class="flex gap-x-1 justify-between items-center text-zinc-600 mt-3 bg-gray-100 rounded-lg px-2 py-3 text-sm">
+                            <div>
+                                تخفیف
+                            </div>
+                            <div class="flex gap-x-1">
+                                <div>
+                                    {{ discount_amount|floatformat:0 }}
+                                </div>
+                                <div>
+                                    تومان
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="flex gap-x-1 justify-between items-center text-zinc-600 mt-3 bg-gray-100 rounded-lg px-2 py-3 text-sm">
+                            <div>
+                                تخفیف
+                            </div>
+                            <div class="flex gap-x-1">
+                                <div>
+                                    0
+                                </div>
+                                <div>
+                                    تومان
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="flex gap-x-1 justify-between items-center text-zinc-800 mt-3 bg-gray-100 rounded-lg px-2 py-3 text-sm">
+                        <div>
+                            جمع سبد خرید
+                        </div>
+                        <div class="flex gap-x-1">
+                            <div>
+                                {{ order.total_price|floatformat:0 }}  <!-- Display final price from the order model -->
+                            </div>
+                            <div>
+                                تومان
+                            </div>
+                        </div>
+                    </div>
+
+                    <form method="POST" action="{% url 'product:discount_code' order.id %}" class="mt-4">
+                        {% csrf_token %}
+                        <div class="flex items-center gap-x-2">
+                            <input type="text" name="discount_code" placeholder="کد تخفیف"
+                                   class="w-full px-3 py-2 rounded-lg border">
+                            <button type="submit" class="px-3 py-2 bg-blue-500 text-white rounded-lg">اعمال</button>
+                        </div>
+                    </form>
+
+
+                    <!-- Display error messages -->
+                    {% if messages %}
+                        <div class="my-4">
+                            {% for message in messages %}
+                                <div class="bg-red-500 text-white p-4 rounded-lg mb-4 flex justify-between items-center">
+                                    <span>{{ message }}</span>
+                                    <button class="ml-4" onclick="this.parentElement.style.display='none'">
+                                        &times;
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <a href="./checkout-complete.html"
+                       class="mx-auto block text-center w-full px-2 py-3 mt-5 text-sm bg-blue-500 hover:bg-blue-400 transition text-gray-100 rounded-lg">
+                        تایید و پرداخت
+                    </a>
+                </div>
+            </div>
+        </div>
+</main>
+{% include 'includes/footer.html' %}
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>

@@ -1,0 +1,57 @@
+{% load static %}
+<html lang="fa" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+  <title>ورود</title>
+</head>
+<body class="bg-[#fcfcfc]" style="background-image: linear-gradient(120deg, #e3eeff 0%, #f7fbfd 100%);">
+  <div class="h-screen flex justify-center items-center">
+    <div class="bg-white rounded-2xl border w-11/12 sm:w-7/12 md:w-6/12 lg:w-4/12 xl:w-3/12 h-auto py-5 px-4">
+        <!-- Logo Section -->
+        <img class="w-44 mx-auto" src="{% static 'image/logo.png' %}" alt="Logo">
+
+        <!-- Title -->
+        <div class="mt-5 text-lg font-semibold text-zinc-800">
+            ورود | ثبت نام
+        </div>
+
+        <!-- Instruction Text -->
+        <div class="my-4 text-xs text-zinc-500">
+            لطفا شماره موبایل خود را وارد کنید
+        </div>
+
+        <!-- Form -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="flex flex-col gap-y-1">
+                <!-- Input Field with Errors -->
+                {{ form.phone }}
+                {% if form.phone.errors %}
+                    <div class="text-red-500 text-xs mt-1">
+                        {% for error in form.phone.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <!-- Submit Button -->
+            <button class="mx-auto w-full px-2 py-2 mt-8 text-sm bg-blue-500 hover:bg-blue-400 transition text-gray-100 rounded-lg">
+                ورود
+            </button>
+        </form>
+
+        <!-- Terms and Conditions -->
+        <div class="mt-8 text-xs text-zinc-500">
+            ورود شما به معنای پذیرش
+            <a class="text-red-400 hover:text-red-500 transition" href="">قوانین و مقررات</a> سورنا میباشد.
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

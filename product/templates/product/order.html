@@ -1,0 +1,342 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسویه حساب</title>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body class="max-w-[1600px] mx-auto bg-[#fcfcfc]">
+<header class="fixed w-full max-w-[1600px] border-b z-50 bg-white">
+    <!-- search bar -->
+    {% include 'includes/search.html' %}
+    <!-- header -->
+    {% include 'includes/header.html' %}
+</header>
+<main class="pt-20 md:pt-40 lg:pt-[73px]">
+    <!-- main -->
+    <div class="lg:px-20 lg:my-10 md:flex gap-5 px-5">
+        <div class="md:w-8/12 px-2 sm:px-3 flex flex-col gap-y-7">
+            <!-- name -->
+            <div class="text-zinc-800 text-lg font-semibold bg-white shadow-large rounded-xl p-3">
+                تسویه حساب
+                <div>
+                    <a class="text-sm text-zinc-500 hover:text-zinc-700 transition"
+                       href="{% url 'product:cart_detail' %}">
+                        سبد خرید
+                    </a>
+                    <span class="text-sm text-zinc-500">
+              /
+            </span>
+                    <a class="text-sm text-zinc-500 hover:text-zinc-700 transition" href="">
+                        تسویه حساب
+                    </a>
+                </div>
+            </div>
+            <div class="shadow-large p-4 rounded-lg bg-white">
+                <form method="POST" id="order-form">
+                    {% csrf_token %}
+                    <div class="flex flex-col gap-y-1">
+                        <label for="address" class="text-zinc-700">انتخاب آدرس</label>
+                        <select name="address"
+                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"
+                                id="address">
+                            <option value="">-</option>
+                            {% for address in user.addresses.all %}
+                                <option value="{{ address.id }}"
+                                        data-first_name="{{ address.first_name }}"
+                                        data-last_name="{{ address.last_name }}"
+                                        data-province="{{ address.province }}"
+                                        data-city="{{ address.city }}"
+                                        data-street="{{ address.street }}"
+                                        data-unit="{{ address.unit }}"
+                                        data-phone="{{ address.phone }}"
+                                        data-postal_code="{{ address.postal_code }}"
+                                        data-additional_notes="{{ address.additional_notes }}">
+                                    {{ address.first_name }} {{ address.last_name }} - {{ address.city }}
+                                    - {{ address.street }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="sm:flex gap-x-5 mt-5">
+                        <div class="sm:w-1/2 mb-2 sm:mb-0 flex flex-col gap-y-1">
+                            <label class="text-zinc-700 flex">
+                                نام
+                            </label>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="sm:w-1/2 flex flex-col gap-y-1">
+                            <label class="text-zinc-700 flex">
+                                نام خانوادگی
+                            </label>
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+
+                    <div class="sm:flex gap-x-5 mt-7">
+                        <div class="sm:w-1/2 mb-2 sm:mb-0 flex flex-col gap-y-1">
+                            <label class="text-zinc-700 flex">
+                                استان
+                            </label>
+                            {{ form.province }}
+                        </div>
+                        <div class="sm:w-1/2 flex flex-col gap-y-1">
+                            <label class="text-zinc-700 flex">
+                                شهر
+                            </label>
+                            {{ form.city }}
+                        </div>
+                    </div>
+
+                    <div class="mt-7">
+                        <div class="flex flex-col gap-y-1">
+                            <label class="text-zinc-700 flex">
+                                خیابان و کوچه
+                            </label>
+                            {{ form.street }}
+                        </div>
+                        <div class="flex flex-col gap-y-1 mt-5">
+                            <label class="text-zinc-700 flex">
+                                شماره پلاک و واحد
+                            </label>
+                            {{ form.building_info }}
+                        </div>
+                    </div>
+
+                    <div class="sm:flex gap-x-5 mt-5">
+                        <div class="sm:w-1/2 mb-2 sm:mb-0 flex flex-col gap-y-1">
+                            <label class="text-zinc-700 flex">
+                                تلفن
+                            </label>
+                            {{ form.phone }}
+                        </div>
+                        <div class="sm:w-1/2 flex flex-col gap-y-1">
+                            <label class="text-zinc-700 flex">
+                                کد پستی
+                            </label>
+                            {{ form.post_code }}
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <div class="flex flex-col gap-y-1">
+                            <label class="text-zinc-700 flex">
+                                توضیحات اضافه
+                            </label>
+                            {{ form.additional_notes }}
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="flex items-center gap-x-2">
+                        <input type="text" name="discount_code" placeholder="کد تخفیف"
+                               class="w-full px-3 py-2 rounded-lg border" id="discount_code">
+                        <button type="button" id="apply-discount" class="px-3 py-2 bg-blue-500 text-white rounded-lg">
+                            اعمال
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-x-2 mt-5">
+                        <button type="submit" class="px-3 py-2 bg-blue-500 text-white rounded-lg">تایید</button>
+                    </div>
+
+                </form>
+
+                <script>
+                    // JavaScript to fill the form with selected address data
+                    document.getElementById('address').addEventListener('change', function () {
+                        const selectedOption = this.options[this.selectedIndex];
+
+                        // If an address is selected
+                        if (selectedOption.value) {
+                            // Fill form fields with selected address data
+                            document.getElementById('id_first_name').value = selectedOption.getAttribute('data-first_name');
+                            document.getElementById('id_last_name').value = selectedOption.getAttribute('data-last_name');
+                            document.getElementById('id_province').value = selectedOption.getAttribute('data-province');
+                            document.getElementById('id_city').value = selectedOption.getAttribute('data-city');
+                            document.getElementById('id_street').value = selectedOption.getAttribute('data-street');
+                            document.getElementById('id_building_info').value = selectedOption.getAttribute('data-unit');
+                            document.getElementById('id_phone').value = selectedOption.getAttribute('data-phone');
+                            document.getElementById('id_post_code').value = selectedOption.getAttribute('data-postal_code');
+                            document.getElementById('id_additional_notes').value = selectedOption.getAttribute('data-additional_notes');
+                        } else {
+                            // Clear the form fields if no address is selected
+                            document.getElementById('id_first_name').value = '';
+                            document.getElementById('id_last_name').value = '';
+                            document.getElementById('id_province').value = '';
+                            document.getElementById('id_city').value = '';
+                            document.getElementById('id_street_details').value = '';
+                            document.getElementById('id_unit_details').value = '';
+                            document.getElementById('id_phone').value = '';
+                            document.getElementById('id_postal_code').value = '';
+                            document.getElementById('id_additional_notes').value = '';
+                        }
+                    });
+                </script>
+
+            </div>
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="alert {{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="md:w-4/12 mt-8 md:mt-0">
+            <div class="px-2 sm:px-6 py-3 bg-white rounded-xl shadow-large mb-5">
+
+                <div class="px-2 sm:px-6 py-3 bg-white rounded-xl shadow-large">
+                    <div class="flex gap-x-1 items-center text-zinc-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#d02525"
+                             viewBox="0 0 256 256">
+                            <path d="M223.92,208H32.08a8,8,0,0,1-8-8.93l14.25-120a8.06,8.06,0,0,1,8-7.07H209.67a8.06,8.06,0,0,1,8,7.07l14.25,120A8,8,0,0,1,223.92,208Z"
+                                  opacity="0.2"></path>
+                            <path d="M239.89,198.12l-14.26-120a16,16,0,0,0-16-14.12H176a48,48,0,0,0-96,0H46.33a16,16,0,0,0-16,14.12l-14.26,120A16,16,0,0,0,20,210.6a16.13,16.13,0,0,0,12,5.4H223.92A16.13,16.13,0,0,0,236,210.6,16,16,0,0,0,239.89,198.12ZM128,32a32,32,0,0,1,32,32H96A32,32,0,0,1,128,32ZM32,200,46.33,80H80v24a8,8,0,0,0,16,0V80h64v24a8,8,0,0,0,16,0V80h33.75l14.17,120Z"></path>
+                        </svg>
+                        سبد شما
+                    </div>
+                    <div class="flex gap-x-1 justify-between items-center text-zinc-600 mt-5 bg-gray-100 rounded-lg px-2 py-3 text-sm">
+                        <div>
+                            قیمت کالاها
+                        </div>
+                        <div class="flex gap-x-1">
+                            <div>
+                                {{ order.total_price|floatformat:0 }}
+                            </div>
+                            <div>
+                                تومان
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="order-details">
+                        {% if discount_amount %}
+                            <div class="flex gap-x-1 justify-between items-center text-zinc-600 mt-3 bg-gray-100 rounded-lg px-2 py-3 text-sm">
+                                <div>تخفیف</div>
+                                <div class="flex gap-x-1">
+                                    <div>{{ discount_amount|floatformat:0 }}</div>
+                                    <div>تومان</div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="flex gap-x-1 justify-between items-center text-zinc-600 mt-3 bg-gray-100 rounded-lg px-2 py-3 text-sm">
+                                <div>تخفیف</div>
+                                <div class="flex gap-x-1">
+                                    <div>0</div>
+                                    <div>تومان</div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="total-price">  <!-- Added this section for total price  -->
+                        <div class="flex gap-x-1 justify-between items-center text-zinc-800 mt-3 bg-gray-100 rounded-lg px-2 py-3 text-sm">
+                            <div>جمع سبد خرید</div>
+                            <div class="flex gap-x-1">
+                                <div>{{ order.total_price|floatformat:0 }}</div>
+                                <!-- Initial price from the order model -->
+                                <div>تومان</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <style>
+                        .messages {
+                            margin-bottom: 20px;
+                        }
+
+                        .alert {
+                            padding: 10px;
+                            border-radius: 5px;
+                        }
+
+                        .alert.success {
+                            background-color: #d4edda;
+                            color: #155724;
+                        }
+
+                        .alert.error {
+                            background-color: #f8d7da;
+                            color: #721c24;
+                        }
+                    </style>
+
+
+                    <script>
+                        document.getElementById('apply-discount').addEventListener('click', function () {
+                            const discountCodeInput = document.getElementById('discount_code');
+                            const formData = new FormData(document.getElementById('order-form'));
+
+                            fetch('{% url "product:discount_code" order.id %}', {
+                                method: 'POST',
+                                body: formData,
+                                headers: {
+                                    'X-CSRFToken': '{{ csrf_token }}' // Include CSRF token
+                                }
+                            })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('Network response was not ok');
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    if (data.success) {
+                                        // Update the discount amount display
+                                        document.getElementById('order-details').innerHTML = `<div class="flex gap-x-1 justify-between items-center text-zinc-600 mt-3 bg-gray-100 rounded-lg px-2 py-3 text-sm">
+                <div>تخفیف</div>
+                <div class="flex gap-x-1">
+                    <div>${data.discount_amount}</div>
+                    <div>تومان</div>
+                </div>
+            </div>`;
+
+                                        // Update the total amount display
+                                        const totalDisplay = document.querySelector('.total-price'); // Assuming you have a total display with class 'total-price'
+                                        totalDisplay.innerHTML = `<div class="flex gap-x-1 justify-between items-center text-zinc-800 mt-3 bg-gray-100 rounded-lg px-2 py-3 text-sm">
+                <div>جمع سبد خرید</div>
+                <div class="flex gap-x-1">
+                    <div>${data.total_price}</div>
+                    <div>تومان</div>
+                </div>
+            </div>`;
+                                    } else {
+                                        // Display error message
+                                        alert(data.message);
+                                    }
+
+                                    // Reset the discount code input field
+                                    discountCodeInput.value = '';
+                                })
+                                .catch(error => console.error('Error:', error));
+                        });
+                    </script>
+
+                    <!-- Display error messages -->
+
+
+                    <a href="#"
+                       class="mx-auto block text-center w-full px-2 py-3 mt-5 text-sm bg-blue-500 hover:bg-blue-400 transition text-gray-100 rounded-lg">
+                        تایید و پرداخت
+                    </a>
+                </div>
+            </div>
+        </div>
+</main>
+{% include 'includes/footer.html' %}
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>

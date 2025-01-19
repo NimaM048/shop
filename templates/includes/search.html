@@ -1,0 +1,16 @@
+<form action="{% url 'product:all_products' %}" method="GET">
+ <div class="items-center z-50 flex-wrap gap-y-5 bg-white rounded-lg overflow-hidden p-2 justify-between drop-shadow-md absolute top-0 left-3 w-11/12 max-w-4xl hidden"
+         id="searchBar">
+        <svg class="fill-blue-500" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill=""
+             viewBox="0 0 256 256">
+            <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+        </svg>
+        <input class="text-base text-gray-700 flex-grow outline-none px-2" type="text" name="search" placeholder="نام محصول را وارد کنید"/>
+     
+        <div class="md:flex items-center rounded-lg pl-2 gap-x-2 mx-auto">
+            <button class="bg-blue-500 hover:bg-blue-400 transition text-white rounded-lg px-4 py-2 md:px-6 md:py-2 text-sm">
+                جستجو
+            </button>
+        </div>
+    </div>
+</form>    

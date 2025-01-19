@@ -1,0 +1,266 @@
+{% load my_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد</title>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body class="max-w-[1600px] mx-auto bg-[#fcfcfc]">
+<header class="fixed w-full max-w-[1600px] border-b z-50 bg-white">
+    <!-- search bar -->
+    {% include 'includes/search.html' %}
+    <!-- header -->
+    {% include 'includes/header.html' %}
+</header>
+<main class="pt-20 md:pt-40 lg:pt-[73px]">
+    <div class="lg:my-10 mx-5 p-3 md:p-5 md:flex gap-5">
+        <div class="md:w-3/12 bg-white shadow-large rounded-2xl py-3">
+            <svg class="fill-zinc-700 mx-auto" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill=""
+                 viewBox="0 0 256 256">
+                <path d="M224,128a95.76,95.76,0,0,1-31.8,71.37A72,72,0,0,0,128,160a40,40,0,1,0-40-40,40,40,0,0,0,40,40,72,72,0,0,0-64.2,39.37h0A96,96,0,1,1,224,128Z"
+                      opacity="0.2"></path>
+                <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"></path>
+            </svg>
+            <div class="text-center font-semibold text-lg md:text-xl text-zinc-700">
+                {{ request.user.fullname }}
+            </div>
+            <ul class="px-5 py-3 space-y-1">
+                <li class="px-3 py-2 group flex gap-x-2 group items-center">
+            <span class="w-1 h-7 transition-all rounded-md bg-blue-700">
+            </span>
+                    <a class="flex gap-x-1 items-center text-blue-700 my-1 w-full" href="{% url 'user_login:profile' %}">
+                        <svg class="fill-zinc-600 group-hover:fill-zinc-700" xmlns="http://www.w3.org/2000/svg"
+                             width="16" height="16" width="12.25" viewBox="0 0 448 512">
+                            <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                        </svg>
+                        پروفایل
+                    </a>
+                </li>
+                <li class="px-3 py-2 group flex gap-x-2 group items-center">
+            <span class="w-1 h-0 group-hover:h-7 transition-all rounded-md bg-blue-700">
+            </span>
+                    <a class="flex gap-x-1 items-center text-zinc-700 hover:text-zinc-600 my-1 w-full" href="{% url 'user_login:order_profile' %}">
+                        <svg class="fill-zinc-600 group-hover:fill-zinc-700" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 576 512" width="16" height="16">
+                            <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
+                        </svg>
+                        سفارش ها
+                    </a>
+                </li>
+
+                <li class="px-3 py-2 group flex gap-x-2 group items-center">
+            <span class="w-1 h-0 group-hover:h-7 transition-all rounded-md bg-blue-700">
+            </span>
+                    <a class="flex gap-x-1 items-center text-zinc-700 hover:text-zinc-600 my-1 w-full" href="{% url 'user_login:message_profile' %}">
+                        <svg class="fill-zinc-600 group-hover:fill-zinc-700" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 512 512" width="16" height="16">
+                            <path d="M64 0C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64h96v80c0 6.1 3.4 11.6 8.8 14.3s11.9 2.1 16.8-1.5L309.3 416H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64z"/>
+                        </svg>
+                        پیام ها
+                    </a>
+                </li>
+                <li class="px-3 py-2 group flex gap-x-2 group items-center">
+            <span class="w-1 h-0 group-hover:h-7 transition-all rounded-md bg-blue-700">
+            </span>
+                    <a class="flex gap-x-1 items-center text-zinc-700 hover:text-zinc-600 my-1 w-full" href="{% url 'user_login:address_profile' %}">
+                        <svg class="fill-zinc-600 group-hover:fill-zinc-700" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 384 512" width="16" height="16">
+                            <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
+                        </svg>
+                        آدرس های من
+                    </a>
+                </li>
+                <li class="px-3 py-2 group flex gap-x-2 group items-center">
+            <span class="w-1 h-0 group-hover:h-7 transition-all rounded-md bg-blue-700">
+            </span>
+                    <a class="flex gap-x-1 items-center text-zinc-700 hover:text-zinc-600 my-1 w-full" href="{% url 'user_login:personal_profile' %}">
+                        <svg class="fill-zinc-600 group-hover:fill-zinc-700" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 512 512" width="16" height="16">
+                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
+                        </svg>
+                        اطلاعات شخصی
+                    </a>
+                </li>
+                <li class="px-3 py-2 group flex gap-x-2 group items-center">
+            <span class="w-1 h-0 group-hover:h-7 transition-all rounded-md bg-red-700">
+            </span>
+                    <a class="flex gap-x-1 items-center text-red-600 my-1 w-full group-hover:text-red-700" href="{% url 'user_login:logout' %}">
+                        <svg class="fill-red-500 group-hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 576 512" width="16" height="16">
+                            <path d="M320 32c0-9.9-4.5-19.2-12.3-25.2S289.8-1.4 280.2 1l-179.9 45C79 51.3 64 70.5 64 92.5V448H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H96 288h32V480 32zM256 256c0 17.7-10.7 32-24 32s-24-14.3-24-32s10.7-32 24-32s24 14.3 24 32zm96-128h96V480c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H512V128c0-35.3-28.7-64-64-64H352v64z"/>
+                        </svg>
+                        خروج
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="md:w-9/12 bg-white shadow-large rounded-2xl p-5 mt-5 md:mt-0">
+            <div class="grid grid-cols-2 md:flex gap-5">
+                <div class="flex md:w-1/4 gap-x-2 items-center bg-green-500 rounded-2xl px-3 py-2 text-xs sm:text-base">
+                    <svg class="fill-zinc-100 bg-green-600 rounded-xl p-1" xmlns="http://www.w3.org/2000/svg" width="44"
+                         height="44" fill="#000000" viewBox="0 0 256 256">
+                        <path d="M216,64l-12.16,66.86A16,16,0,0,1,188.1,144H62.55L48,64Z" opacity="0.2"></path>
+                        <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
+                    </svg>
+                    <div class="text-zinc-100 space-y-1">
+                        <div>
+                            سفارشات کل
+                        </div>
+                        <div>
+                            {{ total_orders }}
+                        </div>
+                    </div>
+                </div>
+                <div class="flex md:w-1/4 gap-x-2 items-center bg-blue-500 rounded-2xl px-3 py-2 text-xs sm:text-base">
+                    <svg class="fill-zinc-100 bg-blue-600 rounded-xl p-1" xmlns="http://www.w3.org/2000/svg" width="44"
+                         height="44" fill="#000000" viewBox="0 0 256 256">
+                        <path d="M16,152H48v56H16a8,8,0,0,1-8-8V160A8,8,0,0,1,16,152ZM204,56a28,28,0,0,0-12,2.71h0A28,28,0,1,0,176,85.29h0A28,28,0,1,0,204,56Z"
+                              opacity="0.2"></path>
+                        <path d="M230.33,141.06a24.43,24.43,0,0,0-21.24-4.23l-41.84,9.62A28,28,0,0,0,140,112H89.94a31.82,31.82,0,0,0-22.63,9.37L44.69,144H16A16,16,0,0,0,0,160v40a16,16,0,0,0,16,16H120a7.93,7.93,0,0,0,1.94-.24l64-16a6.94,6.94,0,0,0,1.19-.4L226,182.82l.44-.2a24.6,24.6,0,0,0,3.93-41.56ZM16,160H40v40H16Zm203.43,8.21-38,16.18L119,200H56V155.31l22.63-22.62A15.86,15.86,0,0,1,89.94,128H140a12,12,0,0,1,0,24H112a8,8,0,0,0,0,16h32a8.32,8.32,0,0,0,1.79-.2l67-15.41.31-.08a8.6,8.6,0,0,1,6.3,15.9ZM164,96a36,36,0,0,0,5.9-.48,36,36,0,1,0,28.22-47A36,36,0,1,0,164,96Zm60-12a20,20,0,1,1-20-20A20,20,0,0,1,224,84ZM164,40a20,20,0,0,1,19.25,14.61,36,36,0,0,0-15,24.93A20.42,20.42,0,0,1,164,80a20,20,0,0,1,0-40Z"></path>
+                    </svg>
+                    <div class="text-zinc-100 space-y-1">
+                        <div>
+                            تحویل داده شده
+                        </div>
+                        <div>
+                            {{ delivered_orders }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10">
+                <h2 class="text-lg font-semibold text-zinc-800">سفارش‌های من</h2>
+
+                <!-- Paid Orders -->
+                <div class="mt-8">
+                    <h3 class="text-md font-medium text-green-600 mb-4">سفارش‌های پرداخت شده</h3>
+                    <table class="w-full border">
+                        <thead>
+                        <tr class="border-y">
+                            <th class="text-sm text-zinc-400 py-3">شماره سفارش</th>
+                            <th class="text-sm text-zinc-400">تاریخ</th>
+                            <th class="text-sm text-zinc-400">مبلغ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in paid_orders %}
+                            <tr class="hover:bg-zinc-100 text-sm">
+                                <td class="px-3 py-4 border-b">{{ order.id }}</td>
+                                <td class="p-3 border-b">{{ order.created_at|to_jalali }}</td>
+                                <td class="p-3 border-b">{{ order.total_price|floatformat:0 }} تومان</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3" class="text-center text-zinc-400 py-4">هیچ سفارش پرداخت شده‌ای یافت
+                                    نشد.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Unpaid Orders -->
+                <div class="mt-8">
+                    <h3 class="text-md font-medium text-yellow-500 mb-4">سفارش‌های در انتظار پرداخت</h3>
+                    <table class="w-full border">
+                        <thead>
+                        <tr class="border-y">
+                            <th class="text-sm text-zinc-400 py-3">شماره سفارش</th>
+                            <th class="text-sm text-zinc-400">تاریخ</th>
+                            <th class="text-sm text-zinc-400">مبلغ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in unpaid_orders %}
+                            <tr class="hover:bg-zinc-100 text-sm">
+                                <td class="px-3 py-4 border-b">{{ order.id }}</td>
+                                <td class="p-3 border-b">{{ order.created_at|to_jalali }}</td>
+                                <td class="p-3 border-b">{{ order.total_price|floatformat:0 }} تومان</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3" class="text-center text-zinc-400 py-4">هیچ سفارش در انتظار پرداختی یافت
+                                    نشد.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Cancelled Orders -->
+                <div class="mt-8">
+                    <h3 class="text-md font-medium text-red-500 mb-4">سفارش‌های لغو شده</h3>
+                    <table class="w-full border">
+                        <thead>
+                        <tr class="border-y">
+                            <th class="text-sm text-zinc-400 py-3">شماره سفارش</th>
+                            <th class="text-sm text-zinc-400">تاریخ</th>
+                            <th class="text-sm text-zinc-400">مبلغ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in cancelled_orders %}
+                            <tr class="hover:bg-zinc-100 text-sm">
+                                <td class="px-3 py-4 border-b">{{ order.id }}</td>
+                                <td class="p-3 border-b">{{ order.created_at|to_jalali }}</td>
+                                <td class="p-3 border-b">{{ order.total_price|floatformat:0 }} تومان</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3" class="text-center text-zinc-400 py-4">هیچ سفارش لغو شده‌ای یافت نشد.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: center; /* Center-align text */
+        padding: 10px; /* Consistent padding */
+    }
+
+    th {
+        background-color: #f9f9f9; /* Light background for headers */
+        font-weight: bold;
+    }
+
+    td {
+        background-color: #fff; /* White background for data rows */
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd; /* Add a border to rows */
+    }
+
+    tr:hover {
+        background-color: #f2f2f2; /* Highlight on hover */
+    }
+</style>
+
+{% include 'includes/footer.html' %}
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>

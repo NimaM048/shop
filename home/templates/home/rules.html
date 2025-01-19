@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قوانین و مقررات</title>
+
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body class="max-w-[1600px] mx-auto bg-[#fcfcfc]">
+  <header class="fixed w-full max-w-[1600px] border-b z-50 bg-white">
+    <!-- search bar -->
+    <div class="items-center z-50 flex-wrap gap-y-5 bg-white rounded-lg overflow-hidden p-2 justify-between drop-shadow-md absolute top-0 left-3 w-11/12 max-w-4xl hidden" id="searchBar">
+      <svg class="fill-blue-500" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg>
+      <input class="text-base text-gray-700 flex-grow outline-none px-2" type="text" placeholder="نام محصول را وارد کنید" />
+      <div class="md:flex items-center rounded-lg pl-2 gap-x-2 mx-auto">
+        <select id="category" class="text-sm text-gray-800 outline-none border-2 p-2 rounded-lg cursor-pointer">
+          <option value="all" selected>انتخاب دسته بندی</option>
+          <option value="mobile">موبایل</option>
+          <option value="home">لوازم خانگی</option>
+          <option value="laptop">لپ تاپ</option>
+        </select>
+        <button class="bg-blue-500 hover:bg-blue-400 transition text-white rounded-lg px-4 py-2 md:px-6 md:py-2 text-sm">
+          جستجو
+        </button>
+      </div>
+    </div>
+    <!-- header -->
+    {% include 'includes/header.html' %}
+  </header>
+  <main class="pt-20 md:pt-40 lg:pt-[73px]">
+    <div class="bg-white shadow-large lg:my-10 mx-5 rounded-xl md:rounded-2xl p-3 md:p-5 border">
+      <div class="flex flex-col justify-center p-5 bg-white shadow-box-md rounded-xl mb-8">
+        <h3 class="text-lg text-gray-800">قوانین و مقررات</h3>
+        <p class="text-sm font-light text-gray-600 my-3">
+          اگر سوالی داشتید به
+          <a class="hover:text-blue-600 text-blue-500 transition" href="">پشتیبانی</a>
+          پیام بدید
+        </p>
+        <div class="flex flex-col gap-y-5 w-11/12 mx-auto mt-4 pb-4">
+          <button class="group border-t border-x border rounded-lg focus:outline-none">
+            <div class="flex items-center justify-between h-14 px-3 rounded-lg text-zinc-700 hover:bg-gray-100">
+              <span class="truncate">
+                چطور سفارشمون رو تایید کنیم؟
+              </span>
+              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="max-h-0 overflow-hidden duration-300 group-focus:max-h-40 hover:bg-gray-100 text-right text-sm">
+              <div class="py-5 px-4 text-zinc-700">
+                با تسویه کردن سبد خرید، سفارش به صورت خودکار تایید میشه.ونیاز به کار خاصی از طرف شما یا ما نیست.
+              </div>
+            </div>
+          </button>
+          <button class="group border-t border-x border rounded-lg focus:outline-none">
+            <div class="flex items-center justify-between h-14 px-3 rounded-lg text-zinc-700 hover:bg-gray-100">
+              <span class="truncate">
+                شرایط گارانتی
+              </span>
+              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="max-h-0 overflow-hidden duration-300 group-focus:max-h-40 hover:bg-gray-100 text-right text-sm">
+              <div class="py-5 px-4 text-zinc-700">
+                با تسویه کردن سبد خرید، سفارش به صورت خودکار تایید میشه.ونیاز به کار خاصی از طرف شما یا ما نیست.
+              </div>
+            </div>
+          </button>
+          <button class="group border-t border-x border rounded-lg focus:outline-none">
+            <div class="flex items-center justify-between h-14 px-3 rounded-lg text-zinc-700 hover:bg-gray-100">
+              <span class="truncate">
+                شرایط استفاده از کد تخفیف اولین خرید چیست؟
+              </span>
+              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="max-h-0 overflow-hidden duration-300 group-focus:max-h-40 hover:bg-gray-100 text-right text-sm">
+              <div class="py-5 px-4 text-zinc-700">
+                با تسویه کردن سبد خرید، سفارش به صورت خودکار تایید میشه.ونیاز به کار خاصی از طرف شما یا ما نیست.
+              </div>
+            </div>
+          </button>
+          <button class="group border-t border-x border rounded-lg focus:outline-none">
+            <div class="flex items-center justify-between h-14 px-3 rounded-lg text-zinc-700 hover:bg-gray-100">
+              <span class="truncate">
+                هزینه ی ارسال چگونه محاسبه میشود؟
+              </span>
+              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="max-h-0 overflow-hidden duration-300 group-focus:max-h-40 hover:bg-gray-100 text-right text-sm">
+              <div class="py-5 px-4 text-zinc-700">
+                با تسویه کردن سبد خرید، سفارش به صورت خودکار تایید میشه.ونیاز به کار خاصی از طرف شما یا ما نیست.
+              </div>
+            </div>
+          </button>
+          <button class="group border-t border-x border rounded-lg focus:outline-none">
+            <div class="flex items-center justify-between h-14 px-3 rounded-lg text-zinc-700 hover:bg-gray-100">
+              <span class="truncate">
+                میتوانم سفارشم را بصورت اقساطی ( اعتباری ) پرداخت کنم؟
+              </span>
+              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="max-h-0 overflow-hidden duration-300 group-focus:max-h-40 hover:bg-gray-100 text-right text-sm">
+              <div class="py-5 px-4 text-zinc-700">
+                با تسویه کردن سبد خرید، سفارش به صورت خودکار تایید میشه.ونیاز به کار خاصی از طرف شما یا ما نیست.
+              </div>
+            </div>
+          </button>
+          <button class="group border-t border-x border rounded-lg focus:outline-none">
+            <div class="flex items-center justify-between h-14 px-3 rounded-lg text-zinc-700 hover:bg-gray-100">
+              <span class="truncate">
+                چطور میتوانم سفارشم را لغو کنم ؟
+              </span>
+              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="max-h-0 overflow-hidden duration-300 group-focus:max-h-40 hover:bg-gray-100 text-right text-sm">
+              <div class="py-5 px-4 text-zinc-700">
+                با تسویه کردن سبد خرید، سفارش به صورت خودکار تایید میشه.ونیاز به کار خاصی از طرف شما یا ما نیست.
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+  {% include 'includes/footer.html' %}
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>

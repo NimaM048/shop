@@ -1,0 +1,254 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جستجو محصول</title>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body class="max-w-[1600px] mx-auto bg-[#fcfcfc]">
+<header class="fixed w-full max-w-[1600px] border-b z-50 bg-white">
+    <!-- search bar -->
+    {% include 'includes/search.html' %}
+    <!-- header -->
+    {% include 'includes/header.html' %}
+</header>
+<main class="pt-20 md:pt-40 lg:pt-[73px]">
+    <div class="my-8 lg:my-10 py-5 lg:px-10 flex flex-col md:flex-row gap-5 p-3 md:p-5">
+        <div class="md:w-4/12 lg:w-3/12">
+            <div class="mb-4 rounded-2xl bg-white border">
+                <div class="flex flex-col overflow-y-auto overflow-x-hidden p-4">
+                    <div>
+                        <!-- title -->
+                        <div class="mb-6 flex items-center justify-between">
+                            <h3 class="text-zinc-700 font-semibold text-lg">
+                                فیلتر ها
+                            </h3>
+                            <button class="py-2 text-sm text-red-400 hover:text-red-500 transition"
+                                    onclick="clearFilters()">
+                                حذف همه
+                            </button>
+                        </div>
+                        <form method="GET" action="{% url 'product:all_products' %}">
+                            <ul class="space-y-2">
+                                <!-- category -->
+                                <li>
+                                    <details class="group border rounded-md">
+                                        <summary
+                                                class="flex cursor-pointer items-center justify-between rounded-lg py-4 px-2 text-zinc-700">
+                                            <span class="font-semibold"> دسته بندی </span>
+                                            <span class="shrink-0 transition duration-200 group-open:-rotate-90">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000"
+                                             viewBox="0 0 256 256">
+                                            <path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"></path>
+                                        </svg>
+                                    </span>
+                                        </summary>
+                                        <div class="mt-2 max-h-60 overflow-y-auto px-2 pb-2">
+                                            <ul class="space-y-2 rounded-lg">
+                                                {% for category in categories %}
+                                                    <li>
+                                                        <div class="flex w-full items-center gap-x-2 pr-4 bg-gray-50 rounded-md">
+                                                            <input id="c{{ forloop.counter }}" type="checkbox"
+                                                                   name="category" value="{{ category.name }}"
+                                                                   class="h-4 w-4 cursor-pointer rounded-xl border-gray-300 bg-gray-100"
+                                                                    {% if category.name in selected_categories %}
+                                                                   checked {% endif %}>
+                                                            <label for="c{{ forloop.counter }}"
+                                                                   class="w-full cursor-pointer py-2 pl-4 text-zinc-600">
+                                                                <span>{{ category.name }}</span>
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </details>
+                                </li>
+                                <!-- only available -->
+                                <li>
+                                    <label class="flex cursor-pointer items-center justify-between pt-5 px-2"
+                                           for="onlySpecialDesktop">
+                                        <div class="text-zinc-700 dark:text-white font-semibold">فقط محصولات موجود در
+                                            انبار
+                                        </div>
+                                        <div class="relative inline-flex cursor-pointer items-center">
+                                            <input class="peer sr-only" id="onlySpecialDesktop" type="checkbox"
+                                                   name="is_existed" value="true" {% if request.GET.is_existed %}
+                                                   checked {% endif %}>
+                                            <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-400 peer-checked:after:translate-x-full peer-focus:ring-blue-400"></div>
+                                        </div>
+                                    </label>
+                                </li>
+                                <br>
+                                <li>
+                                    <div class="flex items-center justify-between">
+                                        <label class="text-zinc-700 font-semibold">فیلتر قیمت</label>
+                                    </div>
+                                    <div class="flex justify-between mt-2">
+                                        <input type="number" name="price_min" placeholder="حداقل قیمت"
+                                               value="{{ price_min }}" class="border rounded-md p-2 w-full mr-2" min="0"
+                                               step="any">
+                                        <input type="number" name="price_max" placeholder="حداکثر قیمت"
+                                               value="{{ price_max }}" class="border rounded-md p-2 w-full ml-2" min="0"
+                                               step="any">
+                                    </div>
+                                </li>
+                            </ul>
+                            <button type="submit" class="mt-4 w-full py-2 bg-blue-500 text-white rounded-md">اعمال
+                                فیلتر
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function clearFilters() {
+                const url = new URL(window.location);
+                url.searchParams.delete('category');
+                url.searchParams.delete('is_existed');
+                url.searchParams.delete('min_price');
+                url.searchParams.delete('max_price');
+
+                window.location = url;
+            }
+        </script>
+        <div class="md:w-8/12 lg:w-9/12">
+            <!-- filter -->
+
+            <!-- products -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
+                {% if products %}
+                    {% for product in products %}
+                        <a href="{% url 'product:product_detail' product.id %}"
+                           class="bg-white rounded-xl border hover:drop-shadow-md transition px-4 py-4 relative flex md:flex-col">
+                            {% if product.discount_percentage %}
+                                <div class="bg-blue-500 rounded-full p-2 text-white flex items-center gap-x-1 text-xs absolute top-2 right-2">
+                                    {{ product.discount_percentage }}%
+                                </div>
+                            {% endif %}
+                            <img class="mx-auto w-5/12 md:w-full" src="{{ product.image.url }}"
+                                 alt="{{ product.name }}">
+                            <div class="flex flex-col justify-between">
+                                <div class="text-zinc-600">
+                                    {{ product.name }}
+                                </div>
+                                <div class="flex justify-between items-center mt-5">
+                                    <div class="flex items-start justify-end gap-x-1 text-xs text-zinc-500">
+                                        <span>4.8</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#f9bc00"
+                                             viewBox="0 0 256 256">
+                                            <path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="flex justify-center gap-x-1 text-sm text-zinc-700">
+                                        <div>{{ product.price }}</div>
+                                        <div>تومان</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-100 to-gray-300">
+                        <!-- Light gradient background -->
+                        <div class="max-w-md w-full text-center p-8 bg-white border-l-8 border-red-600 rounded-lg shadow-2xl transition-transform duration-300 transform hover:scale-105 ease-out">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#e63946"
+                                     class="mb-4" viewBox="0 0 256 256">
+                                    <path d="M128,24A104,104,0,1,0,232,128,104.26,104.26,0,0,0,182,51.54l12.1,12.1a8,8,0,0,1,0,11.31L124.69,135.76a8,8,0,0,1-11.31,0L99.05,119.12a8,8,0,0,1,0-11.31L100.7,106.45A104,104,0,0,0,128,24Zm0,32a72,72,0,1,1-72,72A72.09,72.09,0,0,1,128,56Z"></path>
+                                </svg>
+                                <h1 class="text-3xl font-bold text-zinc-600 mb-2">متاسفیم، محصولی یافت نشد!</h1>
+                                <p class="text-md text-gray-700 mb-4">لطفاً جستجوی خود را تغییر دهید و دوباره امتحان
+                                    کنید.</p>
+                                <a href="{% url 'home:home' %}" class="mt-4 bg-blue-600 text-white py-2 px-6 rounded-lg shadow-md transition duration-200 hover:bg-red-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50">
+                                    بازگشت به صفحه اصلی
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if most_sold_products %}
+                    {% for most_sold_product in most_sold_products %}
+                        <a href="{% url 'product:most_product_detail' most_sold_product.id %}"
+                           class="bg-white rounded-xl border hover:drop-shadow-md transition px-4 py-4 relative flex md:flex-col">
+                            {% if most_sold_product.discount_percentage %}
+                                <div class="bg-blue-500 rounded-full p-2 text-white flex items-center gap-x-1 text-xs absolute top-2 right-2">
+                                    {{ most_sold_product.discount_percentage }}%
+                                </div>
+                            {% endif %}
+                            <img class="mx-auto w-5/12 md:w-full" src="{{ most_sold_product.image.url }}"
+                                 alt="{{ most_sold_product.name }}">
+                            <div class="flex flex-col justify-between">
+                                <div class="text-zinc-600">
+                                    {{ most_sold_product.name }}
+                                </div>
+                                <div class="flex justify-between items-center mt-5">
+                                    <div class="flex items-start justify-end gap-x-1 text-xs text-zinc-500">
+                                        <span>4.8</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#f9bc00"
+                                             viewBox="0 0 256 256">
+                                            <path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23 .84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="flex justify-center gap-x-1 text-sm text-zinc-700">
+                                        <div>{{ most_sold_product.price }}</div>
+                                        <div>تومان</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="mt-8">
+                <ul class="flex items-center justify-center gap-x-2 md:gap-x-3 h-8 text-sm">
+                    {% if products.has_previous %}
+                        <li>
+                            <a href="?page={{ products.previous_page_number }}"
+                               class="flex items-center justify-center transition shadow-lg px-3 h-8 ms-0 text-gray-500 bg-white rounded-lg hover:bg-blue-100 hover:text-blue-400">
+                                <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2" d="M5 1 1 5l4 4"></path>
+                                </svg>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in products.paginator.page_range %}
+                        <li>
+                            <a href="?page={{ num }}"
+                               class="flex items-center justify-center transition shadow-lg px-3 h-8 {% if products.number == num %}text-blue-500 bg-blue-200{% else %}text-gray-500 bg-white{% endif %} rounded-lg hover:bg-blue-100 hover:text-blue-400">{{ num }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if products.has_next %}
+                        <li>
+                            <a href="?page={{ products.next_page_number }}"
+                               class="flex items-center justify-center transition shadow-lg px-3 h-8 text-gray-500 bg-white rounded-lg hover:bg-blue-100 hover:text-blue-400">
+                                <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2" d="m1 9 4-4-4-4"></path>
+                                </svg>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+{% include 'includes/footer.html' %}
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>
