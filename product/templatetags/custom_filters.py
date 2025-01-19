@@ -20,7 +20,7 @@ register = template.Library()
 def to_jalali(date):
     if not date:
         return ""
-    date = localtime(date)  # Converts to local timezone if it's in UTC
+    date = localtime(date)  
     jalali_date = jdatetime.datetime.fromgregorian(datetime=date)
     return jalali_date.strftime('%Y/%m/%d')  # Format: YYYY/MM/DD
 
